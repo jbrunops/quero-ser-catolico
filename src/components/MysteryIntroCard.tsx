@@ -31,9 +31,14 @@ const MysteryIntroCard = ({
         return 'from-white/90 to-vatican-light/80 border-vatican-gold/30';
     }
   };
+  
+  const handleNextStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onComplete();
+  };
 
   return (
-    <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2 animate-fade-in`}>
+    <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
         {mystery.title}
       </h3>
@@ -52,8 +57,8 @@ const MysteryIntroCard = ({
       
       <div className="mt-6 flex justify-end">
         <Button 
-          onClick={onComplete}
-          className="prayer-btn-gold"
+          onClick={handleNextStep}
+          className="prayer-btn-gold transition-all duration-300"
         >
           Próximo Passo
           <ChevronRight className="h-5 w-5" />

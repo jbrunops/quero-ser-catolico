@@ -11,21 +11,25 @@ interface PrayerStepProps {
 
 const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
   const [prayersDone, setPrayersDone] = useState(0);
-  const [isCompleted, setIsCompleted] = useState(false);
   
   if (!isActive) return null;
 
   const hasMultiplePrayers = step.repetitions && step.repetitions > 1;
+  const isCompleted = hasMultiplePrayers && prayersDone >= step.repetitions!;
   
   const markPrayerDone = () => {
     if (hasMultiplePrayers && prayersDone < step.repetitions!) {
-      setPrayersDone(prev => prev + 1);
-      
-      if (prayersDone + 1 >= step.repetitions!) {
-        setIsCompleted(true);
-      }
+      const newCount = prayersDone + 1;
+      setPrayersDone(newCount);
+    }
+  };
+
+  const handleNextStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (!hasMultiplePrayers || isCompleted) {
+      onComplete();
     } else {
-      setIsCompleted(true);
+      markPrayerDone();
     }
   };
 
@@ -44,7 +48,7 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
       
       {step.prayerText && (
         <div className="mt-4 mb-6">
-          <div className="bg-vatican-light rounded-md p-4 border-l-4 border-vatican-gold animate-fade-in">
+          <div className="bg-vatican-light rounded-md p-4 border-l-4 border-vatican-gold">
             <p className="text-vatican-dark/90 font-medium leading-relaxed whitespace-pre-line">
               {step.prayerText}
             </p>
@@ -58,7 +62,7 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
             {Array.from({ length: step.repetitions! }, (_, i) => (
               <div 
                 key={i} 
-                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center ${
                   i < prayersDone 
                     ? 'bg-vatican-gold text-white' 
                     : 'bg-vatican-light/70 text-vatican-dark/40'
@@ -80,23 +84,13 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
       )}
       
       <div className="mt-6 flex justify-end">
-        {!hasMultiplePrayers || isCompleted ? (
-          <Button 
-            onClick={onComplete}
-            className="prayer-btn"
-          >
-            Próximo Passo
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        ) : (
-          <Button 
-            onClick={markPrayerDone}
-            className="prayer-btn"
-          >
-            Próximo Passo ({prayersDone + 1}/{step.repetitions})
-            <ChevronRight className="h-5 w-5" />
-          </Button>
-        )}
+        <Button 
+          onClick={handleNextStep}
+          className="prayer-btn"
+        >
+          {isCompleted ? 'Próximo Passo' : `Próximo Passo ${hasMultiplePrayers ? `(${prayersDone + 1}/${step.repetitions})` : ''}`}
+          <ChevronRight className="h-5 w-5" />
+        </Button>
       </div>
     </div>
   );

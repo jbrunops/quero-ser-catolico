@@ -30,6 +30,11 @@ const OurFatherCard = ({
         return 'from-white/90 to-vatican-light/80 border-vatican-gold/30';
     }
   };
+  
+  const handleNextStep = (e: React.MouseEvent) => {
+    e.preventDefault();
+    onComplete();
+  };
 
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
@@ -49,8 +54,8 @@ const OurFatherCard = ({
       
       <div className="flex justify-end">
         <Button 
-          onClick={onComplete}
-          className="prayer-btn"
+          onClick={handleNextStep}
+          className="prayer-btn transition-all duration-300"
         >
           Iniciar Ave-Marias
         </Button>

@@ -168,9 +168,10 @@ const PrayerBase = ({
   
   const handlePrayHailMary = () => {
     if (hailMaryCount < 10) {
-      setHailMaryCount(prev => prev + 1);
+      const newCount = hailMaryCount + 1;
+      setHailMaryCount(newCount);
       
-      if (hailMaryCount + 1 >= 10) {
+      if (newCount >= 10) {
         setCurrentPhase(PHASE_GLORY);
       }
     }
@@ -197,6 +198,7 @@ const PrayerBase = ({
   };
   
   const handleFinishPrayer = () => {
+    setCurrentPhase(PHASE_COMPLETED);
     setIsPrayerCompleted(true);
     toast.success(isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!", { 
       duration: 5000
@@ -348,7 +350,7 @@ const PrayerBase = ({
     
     if (currentPhase === PHASE_COMPLETED) {
       return (
-        <div className="prayer-card text-center animate-fade-in">
+        <div className="prayer-card text-center">
           <div className="w-20 h-20 rounded-full bg-vatican-gold/30 flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">✝</span>
           </div>
@@ -418,7 +420,13 @@ const PrayerBase = ({
             </p>
             
             {currentPhase !== PHASE_WELCOME && (
-              <div className={`bg-vatican-light/50 rounded-lg p-3 ${getMysteryColorClass()}`}>
+              <div className={`bg-vatican-light/50 rounded-lg p-3 ${
+                (currentPhase === PHASE_MYSTERY_INTRO || 
+                 currentPhase === PHASE_OUR_FATHER || 
+                 currentPhase === PHASE_GLORY) 
+                   ? getMysteryColorClass() 
+                   : 'border-vatican-gold/30'
+              }`}>
                 {!isTerco && currentPhase !== PHASE_INITIAL && (
                   <div className="flex items-center justify-center gap-2 mb-2">
                     {mysterySets.map((set, index) => (
