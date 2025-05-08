@@ -1,113 +1,99 @@
-# Oração do Terço
+# Rezando o Terço - Aplicativo de Oração Católica
 
-[![License](https://img.shields.io/badge/license-MIT-blue.svg)](LICENSE) [![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
-
-Bem-vindo ao **Oração do Terço**, um aplicativo web desenvolvido para ajudar os fiéis a rezarem o Santo Terço de forma interativa e guiada. Nosso objetivo é proporcionar uma experiência espiritual enriquecedora, com uma interface moderna e intuitiva.
-
-Este projeto é construído com tecnologias de ponta para garantir performance, escalabilidade e uma ótima experiência de usuário.
+<div align="center">
+  <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
+  <img src="https://img.shields.io/badge/TypeScript-3178C6?style=for-the-badge&logo=typescript&logoColor=white" alt="TypeScript" />
+  <img src="https://img.shields.io/badge/TailwindCSS-38B2AC?style=for-the-badge&logo=tailwind-css&logoColor=white" alt="Tailwind CSS" />
+  <img src="https://img.shields.io/badge/Vite-646CFF?style=for-the-badge&logo=vite&logoColor=white" alt="Vite" />
+  <img src="https://img.shields.io/badge/React_Router-CA4245?style=for-the-badge&logo=react-router&logoColor=white" alt="React Router" />
+</div>
 
 ## 📖 Sobre o Projeto
 
-O **Oração do Terço** é uma aplicação React que utiliza TypeScript para segurança de tipos, Vite para um desenvolvimento rápido e eficiente, e uma série de bibliotecas modernas como shadcn/ui para componentes de UI e Tailwind CSS para estilização. Ele foi projetado para ser fácil de usar tanto em dispositivos móveis quanto em desktops.
+**Rezando o Terço** é uma aplicação web católica dedicada a auxiliar fiéis na oração do Santo Terço e do Rosário completo. Criada para proporcionar um momento de fé e devoção mariana, a aplicação combina a tradição católica com tecnologia moderna para oferecer uma experiência de oração guiada, acessível e profunda.
 
-### ✨ Funcionalidades
-- Guia interativo para rezar o Terço, com os mistérios diários.
-- Interface amigável e acessível.
-- Suporte a temas claro e escuro.
-- Progresso salvo localmente para continuar de onde parou.
+Ideal para quem deseja aprender a rezar o terço, para devotos experientes que buscam um guia prático, ou para grupos de oração que desejam rezar juntos, nossa aplicação torna a experiência de oração mais rica e acessível.
 
-## 🛠️ Tecnologias Utilizadas
+### ✨ Proposta e Benefícios Espirituais
 
-Este projeto é construído com as seguintes tecnologias:
+Nossa missão é facilitar e enriquecer a prática devocional do Santo Terço e do Rosário, promovendo:
 
-- **React**: Biblioteca JavaScript para construção de interfaces de usuário.
-- **TypeScript**: Superset de JavaScript que adiciona tipagem estática.
-- **Vite**: Ferramenta de build e servidor de desenvolvimento extremamente rápido.
-- **shadcn/ui**: Conjunto de componentes de UI reutilizáveis e acessíveis.
-- **Tailwind CSS**: Framework de estilização utilitário para design moderno.
-- **Radix UI**: Biblioteca de componentes de baixo nível para acessibilidade.
-- **TanStack Query**: Gerenciamento de estado assíncrono para chamadas de API.
-- **React Router**: Roteamento declarativo para navegação na aplicação.
-- **Recharts**: Biblioteca de gráficos para visualização de dados.
+- **Fortalecimento da fé**: auxílio na meditação profunda dos mistérios da vida de Jesus e Maria
+- **Acessibilidade à tradição**: guia completo para quem está começando ou deseja aprofundar sua devoção
+- **Constância na oração**: ferramenta prática que incentiva a prática regular da oração
+- **Conexão espiritual**: momento de paz e contemplação na vida agitada contemporânea
+- **Comunhão com a Igreja**: alinhamento com as práticas devocionais recomendadas pelo magistério católico
 
-## 🚀 Como Executar o Projeto Localmente
+A aplicação foi meticulosamente projetada considerando:
 
-Siga estas instruções para rodar o projeto em sua máquina local:
+- **Acessibilidade universal**: interface simples e intuitiva para pessoas de todas as idades e níveis de familiaridade tecnológica
+- **Versatilidade devocional**: opção de rezar o Terço diário (com mistérios específicos do dia) ou o Rosário completo
+- **Mobilidade e praticidade**: design responsivo para uso em qualquer dispositivo, em casa ou em deslocamento
+- **Profundidade espiritual**: textos contemplativos que auxiliam na meditação dos mistérios da vida de Cristo
 
-### Pré-requisitos
+## 🛠️ Principais Funcionalidades
 
-- **Node.js** (versão 16 ou superior) e **npm** instalados. Recomendamos usar [nvm](https://github.com/nvm-sh/nvm#installing-and-updating) para gerenciar versões do Node.js.
-- **Git** para clonar o repositório.
+- **Página Introdutória Catequética**: explicações sobre a importância e história do Terço na vida católica
+- **Escolha Devocional**: flexibilidade entre rezar o Terço do dia ou o Rosário completo
+- **Guia Passo a Passo Completo**: acompanhamento de cada oração (Pai Nosso, Ave-Maria, Glória, etc.)
+- **Mistérios do Dia Automáticos**: apresentação dos mistérios correspondentes a cada dia da semana conforme tradição católica
+- **Progresso Interativo Visual**: indicador que acompanha o avanço durante a oração
+- **Textos Meditativos**: descrições contemplativas que auxiliam na meditação de cada mistério
+- **Orações Complementares**: inclusão de orações tradicionais como a Salve Rainha e outras
+- **Design Inspirador**: interface que remete à estética e simbologia católica
 
-### Passos
+## 🙏 Experiência de Oração
 
-1. **Clone o repositório**:
-   ```bash
-   git clone https://github.com/seu-usuario/oracaodoterco.git
-   ```
+A aplicação proporciona uma experiência de oração completa:
 
-2. **Navegue até o diretório do projeto**:
-   ```bash
-   cd oracaodoterco
-   ```
+- **Guia de Meditação**: textos que facilitam a contemplação dos mistérios
+- **Ritmo de Oração**: sequência fluida que ajuda a manter o foco e o ritmo das orações
+- **Ambiente Propício**: design que convida à introspecção e à devoção
+- **Acessibilidade**: textos claros e completos de todas as orações
+- **Suporte à Devoção Diária**: mistérios correspondentes ao dia da semana conforme tradição da Igreja
 
-3. **Instale as dependências**:
-   ```bash
-   npm install
-   ```
+## 💻 Tecnologias Utilizadas
 
-4. **Inicie o servidor de desenvolvimento**:
-   ```bash
-   npm run dev
-   ```
+O projeto foi construído com tecnologias web modernas para proporcionar a melhor experiência de usuário:
 
-   O servidor será iniciado em `http://localhost:8080`. Abra seu navegador e acesse este endereço para ver a aplicação em funcionamento.
+- **Frontend Moderno**: React com TypeScript para interface robusta e responsiva
+- **Estilização Adaptativa**: TailwindCSS para design elegante e totalmente responsivo
+- **Navegação Fluida**: React Router para transição suave entre as diferentes seções da oração
+- **Gerenciamento de Estado Eficiente**: React Hooks e TanStack Query para operações otimizadas
+- **Componentes Acessíveis**: Design com foco em acessibilidade seguindo boas práticas web
+- **Performance Otimizada**: Vite para carregamento rápido e experiência fluida
+- **Design Responsivo**: Layout adaptável para todos os tamanhos de tela
 
-### Scripts Disponíveis
+## 📱 Versão para Dispositivos Móveis
 
-- `npm run dev`: Inicia o servidor de desenvolvimento.
-- `npm run build`: Compila a aplicação para produção.
-- `npm run build:dev`: Compila a aplicação no modo de desenvolvimento.
-- `npm run lint`: Executa o linter para verificar o código.
-- `npm run preview`: Visualiza a build de produção localmente.
+Nossa aplicação foi especialmente otimizada para uso em smartphones e tablets, permitindo que os fiéis rezem o terço em qualquer lugar:
 
-## 🌐 Deploy e Hospedagem
+- **Menu Intuitivo para Toque**: navegação simplificada e adaptada para interação touch
+- **Layout Adaptativo**: conteúdo reorganizado para melhor visualização em telas pequenas
+- **Leiturabilidade**: tipografia otimizada para leitura confortável em dispositivos móveis
+- **Carregamento Rápido**: performance otimizada mesmo em conexões de internet limitadas
+- **Funcionalidade Offline**: principais orações acessíveis mesmo sem conexão contínua
+- **Economia de Bateria**: implementações que respeitam os recursos do dispositivo
 
-Para publicar a aplicação, você pode usar plataformas como Vercel, Netlify ou GitHub Pages. Se estiver usando a plataforma Lovable, basta clicar em **Share > Publish** no painel do projeto.
+## 📊 Benefícios e Diferenciais
 
-### Domínio Personalizado
+- **Foco Espiritual**: interface que minimiza distrações e convida à contemplação
+- **Adaptação ao Ritmo Individual**: flexibilidade para avançar no próprio ritmo de oração
+- **Aprendizado Integrado**: oportunidade de memorizar as orações enquanto as pratica
+- **Rotina de Oração**: facilita a incorporação da oração do terço na rotina diária
+- **Acompanhamento do Calendário Litúrgico**: sincronização com os mistérios do dia
 
-Se desejar conectar um domínio personalizado, acesse **Project > Settings > Domains** na plataforma Lovable e siga as instruções. Mais detalhes em [Setting up a custom domain](https://docs.lovable.dev/tips-tricks/custom-domain#step-by-step-guide).
+## 📱 Contato
 
-## 🤝 Como Contribuir
+Para mais informações, sugestões, feedback ou suporte espiritual:
 
-Adoramos receber contribuições da comunidade! Se você deseja ajudar, siga estas etapas:
-
-1. **Faça um fork** do repositório.
-2. **Crie uma branch** para sua feature ou correção de bug:
-   ```bash
-   git checkout -b minha-feature
-   ```
-3. **Faça suas alterações** e commit:
-   ```bash
-   git commit -m "Descrição da minha feature"
-   ```
-4. **Envie para o repositório remoto**:
-   ```bash
-   git push origin minha-feature
-   ```
-5. **Abra um Pull Request** descrevendo suas alterações.
-
-Por favor, siga nosso [Código de Conduta](CODE_OF_CONDUCT.md) ao interagir com a comunidade.
-
-## 📜 Licença
-
-Este projeto está licenciado sob a [MIT License](LICENSE).
-
-## 📞 Contato
-
-Se tiver dúvidas ou sugestões, sinta-se à vontade para abrir uma issue ou entrar em contato conosco.
+- **Telefone**: (81) 9-9983-6413
+- **E-mail**: jbrunops@outlook.com
 
 ---
 
-Feito com ❤️ para a comunidade católica.
+<div align="center">
+  <p>Desenvolvido com ❤️ e devoção à espiritualidade católica</p>
+  <p>© 2023-2024 Rezar em Luz - Guia para suas orações e meditações do Santo Terço e Rosário</p>
+  <p><em>"O Santo Rosário é, depois da Sagrada Liturgia, a oração mais propícia para honrar a Santíssima Virgem Maria"</em> - São João Paulo II</p>
+</div>
