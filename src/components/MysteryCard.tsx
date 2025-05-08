@@ -1,5 +1,5 @@
 import React from 'react';
-import { Mystery } from '../utils/prayers';
+import { Mystery, Prayers } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
 import { ChevronRight } from 'lucide-react';
 
@@ -40,13 +40,15 @@ const MysteryCard = ({
 
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
-      <h3 className="text-2xl font-semibold text-vatican-dark mb-2">
-        {mystery.title}
+      <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
+        Ave Maria
       </h3>
       
-      <p className="text-vatican-dark/80 mb-6">
-        {mystery.description}
-      </p>
+      <div className="bg-vatican-light/70 rounded-md p-4 border-l-4 border-vatican-gold mb-6">
+        <p className="text-vatican-dark/90 font-medium leading-relaxed">
+          {Prayers.hailMary}
+        </p>
+      </div>
       
       <div className="mb-6">
         <div className="flex flex-wrap gap-2 justify-center my-4">
@@ -75,7 +77,7 @@ const MysteryCard = ({
             onClick={onComplete}
             className="prayer-btn-gold"
           >
-            Próximo Mistério
+            Próximo Passo
             <ChevronRight className="h-5 w-5" />
           </Button>
         ) : (

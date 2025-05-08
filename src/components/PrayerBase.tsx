@@ -1,0 +1,477 @@
+import React, { useState, useEffect } from 'react';
+import PrayerStep from './PrayerStep';
+import MysteryCard from './MysteryCard';
+import MysteryIntroCard from './MysteryIntroCard';
+import OurFatherCard from './OurFatherCard';
+import GloryCard from './GloryCard';
+import SalveRainhaCard from './SalveRainhaCard';
+import RosaryTimeline from './RosaryTimeline';
+import Header from './Header';
+import Footer from './Footer';
+import { 
+  TercoSteps,
+  Mysteries, 
+  getMysteryTitle,
+  getMysteryOfTheDay,
+  Prayers,
+  Mystery
+} from '../utils/prayers';
+import { Button } from '@/components/ui/button';
+import { toast } from 'sonner';
+
+// Tipos para as props
+interface PrayerBaseProps {
+  mode: 'terco' | 'rosario';
+  mysterySets?: string[];
+  initialMysterySet?: string;
+  showHeader?: boolean;
+  showFooter?: boolean;
+}
+
+// Gerar todos os passos para a timeline
+const generateTimelineSteps = (mysterySets: string[], isTerco: boolean) => {
+  const initialSteps = TercoSteps.map(step => ({
+    id: `init-${step.id}`,
+    title: step.title,
+    type: 'initial'
+  }));
+  
+  const mysterySteps = [];
+  
+  if (isTerco) {
+    // Para o terço, utilizamos apenas o conjunto especificado
+    const mysterySet = mysterySets[0];
+    Mysteries[mysterySet].forEach((mystery, index) => {
+      mysterySteps.push({
+        id: `mystery-${index}`,
+        title: `${index + 1}º Mistério`,
+        type: 'mystery'
+      });
+    });
+  } else {
+    // Para o rosário, utilizamos todos os conjuntos
+    for (const set of mysterySets) {
+      Mysteries[set].forEach((mystery, index) => {
+        mysterySteps.push({
+          id: `${set}-${index}`,
+          title: `${index + 1}º ${getMysteryTitle(set).slice(0, -1)}`,
+          type: 'mystery'
+        });
+      });
+    }
+  }
+  
+  const finalSteps = [{ id: 'final', title: 'Salve Rainha', type: 'final' }];
+  
+  return [...initialSteps, ...mysterySteps, ...finalSteps];
+};
+
+// Componente principal
+const PrayerBase = ({ 
+  mode = 'terco',
+  mysterySets = mode === 'terco' ? [getMysteryOfTheDay()] : ['joyful', 'luminous', 'sorrowful', 'glorious'],
+  initialMysterySet = mysterySets[0],
+  showHeader = true,
+  showFooter = true
+}: PrayerBaseProps) => {
+  // Definições das etapas
+  const PHASE_WELCOME = 'welcome';
+  const PHASE_INITIAL = 'initial';
+  const PHASE_MYSTERY_INTRO = 'mystery_intro';
+  const PHASE_OUR_FATHER = 'our_father';
+  const PHASE_HAIL_MARY = 'hail_mary';
+  const PHASE_GLORY = 'glory';
+  const PHASE_FINAL = 'final';
+  const PHASE_COMPLETED = 'completed';
+  
+  // Estados
+  const [currentPhase, setCurrentPhase] = useState(mode === 'rosario' ? PHASE_WELCOME : PHASE_INITIAL);
+  const [currentStepIndex, setCurrentStepIndex] = useState(0);
+  const [currentMysterySetIndex, setCurrentMysterySetIndex] = useState(0);
+  const [currentMysteryIndex, setCurrentMysteryIndex] = useState(0);
+  const [hailMaryCount, setHailMaryCount] = useState(0);
+  const [isPrayerCompleted, setIsPrayerCompleted] = useState(false);
+  
+  // Variáveis derivadas
+  const isTerco = mode === 'terco';
+  const currentMysterySet = mysterySets[currentMysterySetIndex];
+  const currentMysteries = Mysteries[currentMysterySet];
+  const timelineSteps = generateTimelineSteps(mysterySets, isTerco);
+  
+  // Calcular a posição na timeline
+  const getTimelinePosition = () => {
+    if (currentPhase === PHASE_WELCOME) {
+      return 0;
+    }
+    
+    if (currentPhase === PHASE_INITIAL) {
+      return currentStepIndex;
+    }
+    
+    const initialStepsCount = TercoSteps.length;
+    let basePosition = initialStepsCount;
+    
+    if (!isTerco) {
+      // No rosário, precisamos considerar os conjuntos anteriores
+      for (let i = 0; i < currentMysterySetIndex; i++) {
+        basePosition += Mysteries[mysterySets[i]].length;
+      }
+    }
+    
+    const mysteryBasePosition = basePosition + currentMysteryIndex;
+    
+    if (currentPhase === PHASE_MYSTERY_INTRO || currentPhase === PHASE_OUR_FATHER) {
+      return mysteryBasePosition;
+    } else if (currentPhase === PHASE_HAIL_MARY) {
+      return mysteryBasePosition + (hailMaryCount / 20);
+    } else if (currentPhase === PHASE_GLORY) {
+      return mysteryBasePosition + 0.5;
+    } else if (currentPhase === PHASE_FINAL || currentPhase === PHASE_COMPLETED) {
+      return timelineSteps.length - 1;
+    }
+    
+    return currentStepIndex;
+  };
+  
+  // Timeline
+  const timelinePosition = getTimelinePosition();
+  const displayTimelineSteps = timelineSteps.map((step, index) => ({
+    ...step,
+    isCompleted: index < Math.floor(timelinePosition),
+    isCurrent: Math.floor(index) === Math.floor(timelinePosition)
+  }));
+  
+  // Funções para gerenciar os passos
+  const startPrayer = () => {
+    setCurrentPhase(PHASE_INITIAL);
+    toast.success(isTerco ? "Iniciando o Santo Terço!" : "Iniciando o Santo Rosário Completo!");
+  };
+  
+  const nextInitialStep = () => {
+    if (currentStepIndex < TercoSteps.length - 1) {
+      setCurrentStepIndex(prev => prev + 1);
+      toast.success("Passo concluído!");
+    } else {
+      setCurrentPhase(PHASE_MYSTERY_INTRO);
+      toast.success(`Iniciando os ${getMysteryTitle(currentMysterySet)}!`);
+    }
+  };
+  
+  const handleMysteryIntroComplete = () => {
+    setCurrentPhase(PHASE_OUR_FATHER);
+  };
+  
+  const handleOurFatherComplete = () => {
+    setCurrentPhase(PHASE_HAIL_MARY);
+    setHailMaryCount(0);
+  };
+  
+  const handlePrayHailMary = () => {
+    if (hailMaryCount < 10) {
+      setHailMaryCount(prev => prev + 1);
+      
+      if (hailMaryCount + 1 >= 10) {
+        setCurrentPhase(PHASE_GLORY);
+      }
+    }
+  };
+  
+  const handleGloriaComplete = () => {
+    if (currentMysteryIndex < currentMysteries.length - 1) {
+      // Próximo mistério no mesmo conjunto
+      setCurrentMysteryIndex(prev => prev + 1);
+      setCurrentPhase(PHASE_MYSTERY_INTRO);
+      toast.success(`Próximo mistério: ${currentMysteries[currentMysteryIndex + 1].title}`);
+    } else if (!isTerco && currentMysterySetIndex < mysterySets.length - 1) {
+      // No rosário, avançamos para o próximo conjunto de mistérios
+      setCurrentMysterySetIndex(prev => prev + 1);
+      setCurrentMysteryIndex(0);
+      setCurrentPhase(PHASE_MYSTERY_INTRO);
+      toast.success(`Completou os ${getMysteryTitle(currentMysterySet)}! Avançando para os próximos mistérios...`, { 
+        duration: 3000
+      });
+    } else {
+      // Orações finais
+      setCurrentPhase(PHASE_FINAL);
+    }
+  };
+  
+  const handleFinishPrayer = () => {
+    setIsPrayerCompleted(true);
+    toast.success(isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!", { 
+      duration: 5000
+    });
+  };
+  
+  const resetPrayer = () => {
+    setCurrentStepIndex(0);
+    setCurrentMysterySetIndex(0);
+    setCurrentMysteryIndex(0);
+    setHailMaryCount(0);
+    setCurrentPhase(mode === 'rosario' ? PHASE_WELCOME : PHASE_INITIAL);
+    setIsPrayerCompleted(false);
+    window.scrollTo({ top: 0, behavior: 'smooth' });
+    toast.info(isTerco ? "Iniciando um novo terço" : "Iniciando um novo rosário", { duration: 3000 });
+  };
+  
+  // Scroll para o topo quando a página carrega
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, []);
+  
+  // Obter classe de cores baseada no tipo de mistério
+  const getMysteryColorClass = () => {
+    switch (currentMysterySet) {
+      case 'joyful':
+        return 'bg-blue-50 border-blue-200';
+      case 'sorrowful':
+        return 'bg-red-50 border-red-200';
+      case 'glorious':
+        return 'bg-yellow-50 border-yellow-200';
+      case 'luminous':
+        return 'bg-indigo-50 border-indigo-200';
+      default:
+        return 'bg-vatican-light/50 border-vatican-gold/30';
+    }
+  };
+  
+  // Renderizar o conteúdo atual baseado na fase
+  const renderCurrentContent = () => {
+    if (currentPhase === PHASE_WELCOME) {
+      return (
+        <div className="step-card">
+          <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
+            Mistérios do Santo Rosário
+          </h3>
+          <p className="text-vatican-dark/80 mb-6">
+            O Santo Rosário completo inclui os seguintes mistérios:
+          </p>
+          
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
+            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
+              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Gozosos</h4>
+              <p className="text-sm text-vatican-dark/70">Segunda-feira e Sábado</p>
+            </div>
+            
+            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
+              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Luminosos</h4>
+              <p className="text-sm text-vatican-dark/70">Quinta-feira</p>
+            </div>
+            
+            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
+              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Dolorosos</h4>
+              <p className="text-sm text-vatican-dark/70">Terça-feira e Sexta-feira</p>
+            </div>
+            
+            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
+              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Gloriosos</h4>
+              <p className="text-sm text-vatican-dark/70">Quarta-feira e Domingo</p>
+            </div>
+          </div>
+          
+          <div className="flex justify-center">
+            <Button className="prayer-btn-gold" onClick={startPrayer}>
+              Iniciar o Rosário Completo
+            </Button>
+          </div>
+        </div>
+      );
+    }
+    
+    if (currentPhase === PHASE_INITIAL) {
+      return (
+        <PrayerStep
+          key={TercoSteps[currentStepIndex].id}
+          step={TercoSteps[currentStepIndex]}
+          onComplete={nextInitialStep}
+          isActive={true}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_MYSTERY_INTRO) {
+      return (
+        <MysteryIntroCard
+          mystery={currentMysteries[currentMysteryIndex]}
+          onComplete={handleMysteryIntroComplete}
+          isActive={true}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_OUR_FATHER) {
+      return (
+        <OurFatherCard
+          mystery={currentMysteries[currentMysteryIndex]}
+          onComplete={handleOurFatherComplete}
+          isActive={true}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_HAIL_MARY) {
+      return (
+        <MysteryCard
+          mystery={currentMysteries[currentMysteryIndex]}
+          onComplete={() => setCurrentPhase(PHASE_GLORY)}
+          isActive={true}
+          hailMaryCount={hailMaryCount}
+          onPrayHailMary={handlePrayHailMary}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_GLORY) {
+      const isLastMystery = isTerco 
+        ? currentMysteryIndex === currentMysteries.length - 1
+        : (currentMysteryIndex === currentMysteries.length - 1 && currentMysterySetIndex === mysterySets.length - 1);
+        
+      return (
+        <GloryCard
+          mystery={currentMysteries[currentMysteryIndex]}
+          onComplete={handleGloriaComplete}
+          isActive={true}
+          isLastMystery={isLastMystery}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_FINAL) {
+      return (
+        <SalveRainhaCard
+          onComplete={handleFinishPrayer}
+          isActive={true}
+          type={isTerco ? 'terco' : 'rosario'}
+        />
+      );
+    }
+    
+    if (currentPhase === PHASE_COMPLETED) {
+      return (
+        <div className="prayer-card text-center animate-fade-in">
+          <div className="w-20 h-20 rounded-full bg-vatican-gold/30 flex items-center justify-center mx-auto mb-6">
+            <span className="text-4xl">✝</span>
+          </div>
+          <h2 className="text-3xl font-semibold text-vatican-dark mb-6">
+            {isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!"}
+          </h2>
+          <p className="text-lg text-vatican-dark/80 mb-6">
+            Parabéns por completar o {isTerco ? "Santo Terço" : "Santo Rosário"}! Que as bênçãos de Nossa Senhora estejam com você.
+          </p>
+          
+          <div className="bg-vatican-light/70 rounded-md p-4 border-l-4 border-vatican-gold mb-8">
+            <h3 className="text-xl font-medium text-vatican-dark mb-2">Salve-Rainha</h3>
+            <p className="text-vatican-dark/90 leading-relaxed">
+              {Prayers.salvePrayers}
+            </p>
+          </div>
+          
+          <Button 
+            onClick={resetPrayer}
+            className="prayer-btn-gold mx-auto"
+          >
+            Rezar Novamente
+          </Button>
+        </div>
+      );
+    }
+    
+    return null;
+  };
+  
+  const Wrapper = ({ children }: { children: React.ReactNode }) => {
+    if (showHeader || showFooter) {
+      return (
+        <div className="flex flex-col min-h-screen">
+          {showHeader && <Header />}
+          
+          <main className="flex-grow container mx-auto px-4 py-8">
+            <div className="max-w-3xl mx-auto">
+              {children}
+            </div>
+          </main>
+          
+          {showFooter && <Footer />}
+        </div>
+      );
+    }
+    
+    return (
+      <div className="container mx-auto px-4 py-8">
+        <div className="max-w-3xl mx-auto">
+          {children}
+        </div>
+      </div>
+    );
+  };
+  
+  return (
+    <Wrapper>
+      {!isPrayerCompleted ? (
+        <>
+          <div className="prayer-card mb-6 text-center">
+            <h1 className="rosary-heading">
+              {isTerco ? "Santo Terço" : "Santo Rosário"}
+            </h1>
+            <p className="text-lg text-vatican-dark/80 mb-6">
+              Guia interativo para a oração do {isTerco ? "Santo Terço" : "Santo Rosário"}
+            </p>
+            
+            {currentPhase !== PHASE_WELCOME && (
+              <div className={`bg-vatican-light/50 rounded-lg p-3 ${getMysteryColorClass()}`}>
+                {!isTerco && currentPhase !== PHASE_INITIAL && (
+                  <div className="flex items-center justify-center gap-2 mb-2">
+                    {mysterySets.map((set, index) => (
+                      <div 
+                        key={set}
+                        className={`px-3 py-1 text-xs rounded-full ${
+                          index < currentMysterySetIndex 
+                            ? 'bg-vatican-gold/80 text-white' 
+                            : index === currentMysterySetIndex 
+                              ? 'bg-vatican-gold/30 text-vatican-dark font-medium' 
+                              : 'bg-vatican-light/70 text-vatican-dark/60'
+                        }`}
+                      >
+                        {getMysteryTitle(set).slice(0, -1)}
+                      </div>
+                    ))}
+                  </div>
+                )}
+                
+                {currentPhase === PHASE_INITIAL ? (
+                  <p className="text-vatican-dark/80">
+                    {isTerco ? "Hoje" : "Atual"}: <span className="font-medium text-vatican-blue">{getMysteryTitle(currentMysterySet)}</span>
+                  </p>
+                ) : (
+                  <>
+                    <p className="text-vatican-dark/80 mb-1">
+                      <span className="font-medium text-vatican-blue">{getMysteryTitle(currentMysterySet)}</span>
+                    </p>
+                    <p className="text-vatican-dark/90 font-medium">
+                      Meditando: <span className="font-semibold">{currentMysteries[currentMysteryIndex].title}</span>
+                    </p>
+                  </>
+                )}
+              </div>
+            )}
+          </div>
+          
+          {currentPhase !== PHASE_WELCOME && (
+            <RosaryTimeline 
+              steps={displayTimelineSteps} 
+              currentStepIndex={Math.floor(timelinePosition)}
+              totalSteps={timelineSteps.length} 
+              isRosary={!isTerco}
+            />
+          )}
+          
+          {renderCurrentContent()}
+        </>
+      ) : (
+        renderCurrentContent()
+      )}
+    </Wrapper>
+  );
+};
+
+export default PrayerBase; 
