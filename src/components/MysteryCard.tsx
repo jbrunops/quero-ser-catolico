@@ -22,8 +22,24 @@ const MysteryCard = ({
 
   if (!isActive) return null;
 
+  // Cores específicas para cada tipo de mistério
+  const getBgColor = () => {
+    switch (mystery.type) {
+      case 'joyful':
+        return 'from-blue-50 to-blue-100 border-blue-200';
+      case 'sorrowful':
+        return 'from-red-50 to-red-100 border-red-200';
+      case 'glorious':
+        return 'from-yellow-50 to-yellow-100 border-yellow-200';
+      case 'luminous':
+        return 'from-indigo-50 to-indigo-100 border-indigo-200';
+      default:
+        return 'from-white/90 to-vatican-light/80 border-vatican-gold/30';
+    }
+  };
+
   return (
-    <div className="step-card bg-gradient-to-br from-white/90 to-vatican-light/80 border-vatican-gold/30">
+    <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-vatican-dark mb-2">
         {mystery.title}
       </h3>

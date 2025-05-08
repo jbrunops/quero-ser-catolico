@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import Header from '../components/Header';
 import Footer from '../components/Footer';
@@ -20,6 +19,7 @@ const Terco = () => {
   const [currentMysteryIndex, setCurrentMysteryIndex] = useState(0);
   const [hailMaryCount, setHailMaryCount] = useState(0);
   const [showOurFather, setShowOurFather] = useState(false);
+  const [showMysteryIntro, setShowMysteryIntro] = useState(false);
   const [showGlory, setShowGlory] = useState(false);
   const [mysteryType, setMysteryType] = useState<string>(getMysteryOfTheDay());
   const [isTercoCompleted, setIsTercoCompleted] = useState(false);
@@ -34,9 +34,15 @@ const Terco = () => {
       toast.success("Passo concluído!");
     } else {
       // Vamos para os mistérios depois de completar os passos iniciais
-      setShowOurFather(true);
+      setShowMysteryIntro(true);
       toast.success("Iniciando os mistérios do dia!");
     }
+  };
+  
+  // Função para mostrar o Pai Nosso após a introdução do mistério
+  const handleMysteryIntroComplete = () => {
+    setShowMysteryIntro(false);
+    setShowOurFather(true);
   };
   
   // Função para lidar com a oração do Pai-Nosso antes do mistério
@@ -54,7 +60,7 @@ const Terco = () => {
   const handleGloriaComplete = () => {
     if (currentMysteryIndex < todaysMysteries.length - 1) {
       setCurrentMysteryIndex(prev => prev + 1);
-      setShowOurFather(true);
+      setShowMysteryIntro(true);
     } else {
       // Terço completo
       setIsTercoCompleted(true);
@@ -80,10 +86,27 @@ const Terco = () => {
     setCurrentMysteryIndex(0);
     setHailMaryCount(0);
     setShowOurFather(false);
+    setShowMysteryIntro(false);
     setShowGlory(false);
     setIsTercoCompleted(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
     toast.info("Iniciando um novo terço", { duration: 3000 });
+  };
+  
+  // Obter classe de cores baseada no tipo de mistério
+  const getMysteryColorClass = () => {
+    switch (mysteryType) {
+      case 'joyful':
+        return 'bg-blue-50 border-blue-200';
+      case 'sorrowful':
+        return 'bg-red-50 border-red-200';
+      case 'glorious':
+        return 'bg-yellow-50 border-yellow-200';
+      case 'luminous':
+        return 'bg-indigo-50 border-indigo-200';
+      default:
+        return 'bg-vatican-light/50 border-vatican-gold/30';
+    }
   };
   
   // Scroll para o topo quando a página carrega
@@ -126,6 +149,31 @@ const Terco = () => {
                 />
               ))}
               
+              {/* Introdução ao mistério */}
+              {showMysteryIntro && currentStepIndex >= TercoSteps.length - 1 && (
+                <div className={`step-card ${getMysteryColorClass()} border-2 animate-fade-in`}>
+                  <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
+                    {todaysMysteries[currentMysteryIndex].title}
+                  </h3>
+                  <p className="text-vatican-dark/80 mb-4">
+                    Vamos meditar o {todaysMysteries[currentMysteryIndex].title}
+                  </p>
+                  <div className="bg-white/70 rounded-md p-4 border-l-4 border-vatican-gold mb-6">
+                    <p className="text-vatican-dark/90 font-medium leading-relaxed">
+                      {todaysMysteries[currentMysteryIndex].description}
+                    </p>
+                  </div>
+                  <div className="flex justify-end">
+                    <Button 
+                      onClick={handleMysteryIntroComplete}
+                      className="prayer-btn-gold"
+                    >
+                      Iniciar Mistério
+                    </Button>
+                  </div>
+                </div>
+              )}
+              
               {/* Pai-Nosso antes de cada mistério */}
               {showOurFather && currentStepIndex >= TercoSteps.length - 1 && (
                 <div className="step-card">
@@ -152,7 +200,7 @@ const Terco = () => {
               )}
               
               {/* Mistérios */}
-              {!showOurFather && currentStepIndex >= TercoSteps.length - 1 && !showGlory && (
+              {!showOurFather && !showMysteryIntro && currentStepIndex >= TercoSteps.length - 1 && !showGlory && (
                 <MysteryCard
                   mystery={todaysMysteries[currentMysteryIndex]}
                   onComplete={() => setShowGlory(true)}
