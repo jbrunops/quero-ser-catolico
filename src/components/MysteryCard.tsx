@@ -57,7 +57,7 @@ const MysteryCard = ({
           {Array.from({ length: 10 }, (_, i) => (
             <div 
               key={i} 
-              className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
+              className={`w-8 h-8 rounded-full flex items-center justify-center ${
                 i < hailMaryCount 
                   ? 'bg-vatican-gold text-white' 
                   : 'bg-vatican-light/70 text-vatican-dark/40'
@@ -69,11 +69,7 @@ const MysteryCard = ({
         </div>
         
         <div className="text-center text-vatican-dark/70 mb-4">
-          {hailMaryCount < 10 ? (
-            <p>{hailMaryCount} de 10 Ave-Marias rezadas</p>
-          ) : (
-            <p>Ave-Marias completas!</p>
-          )}
+          {hailMaryCount} de 10 Ave-Marias rezadas
         </div>
       </div>
       
@@ -82,7 +78,7 @@ const MysteryCard = ({
           onClick={handleNextPrayer}
           className="prayer-btn"
         >
-          {isCompleted ? 'Próximo Passo' : `Próximo Passo (${hailMaryCount+1}/10)`}
+          {isCompleted ? 'Próximo Passo' : `Próximo Passo (${hailMaryCount}/10)`}
           <ChevronRight className="h-5 w-5" />
         </Button>
       </div>

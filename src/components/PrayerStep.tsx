@@ -74,11 +74,7 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
           </div>
           
           <div className="text-center text-vatican-dark/70 mb-4">
-            {prayersDone < step.repetitions! ? (
-              <p>{prayersDone} de {step.repetitions} {step.title} rezadas</p>
-            ) : (
-              <p>Orações completas!</p>
-            )}
+            {prayersDone} de {step.repetitions} {step.title} rezadas
           </div>
         </div>
       )}
@@ -88,7 +84,7 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
           onClick={handleNextStep}
           className="prayer-btn"
         >
-          {isCompleted ? 'Próximo Passo' : `Próximo Passo ${hasMultiplePrayers ? `(${prayersDone + 1}/${step.repetitions})` : ''}`}
+          {isCompleted ? 'Próximo Passo' : `Próximo Passo ${hasMultiplePrayers ? `(${prayersDone}/${step.repetitions})` : ''}`}
           <ChevronRight className="h-5 w-5" />
         </Button>
       </div>

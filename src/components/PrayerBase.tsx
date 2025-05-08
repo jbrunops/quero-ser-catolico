@@ -17,7 +17,6 @@ import {
   Mystery
 } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
-import { toast } from 'sonner';
 
 // Tipos para as props
 interface PrayerBaseProps {
@@ -144,16 +143,13 @@ const PrayerBase = ({
   // Funções para gerenciar os passos
   const startPrayer = () => {
     setCurrentPhase(PHASE_INITIAL);
-    toast.success(isTerco ? "Iniciando o Santo Terço!" : "Iniciando o Santo Rosário Completo!");
   };
   
   const nextInitialStep = () => {
     if (currentStepIndex < TercoSteps.length - 1) {
       setCurrentStepIndex(prev => prev + 1);
-      toast.success("Passo concluído!");
     } else {
       setCurrentPhase(PHASE_MYSTERY_INTRO);
-      toast.success(`Iniciando os ${getMysteryTitle(currentMysterySet)}!`);
     }
   };
   
@@ -182,15 +178,11 @@ const PrayerBase = ({
       // Próximo mistério no mesmo conjunto
       setCurrentMysteryIndex(prev => prev + 1);
       setCurrentPhase(PHASE_MYSTERY_INTRO);
-      toast.success(`Próximo mistério: ${currentMysteries[currentMysteryIndex + 1].title}`);
     } else if (!isTerco && currentMysterySetIndex < mysterySets.length - 1) {
       // No rosário, avançamos para o próximo conjunto de mistérios
       setCurrentMysterySetIndex(prev => prev + 1);
       setCurrentMysteryIndex(0);
       setCurrentPhase(PHASE_MYSTERY_INTRO);
-      toast.success(`Completou os ${getMysteryTitle(currentMysterySet)}! Avançando para os próximos mistérios...`, { 
-        duration: 3000
-      });
     } else {
       // Orações finais
       setCurrentPhase(PHASE_FINAL);
@@ -200,9 +192,6 @@ const PrayerBase = ({
   const handleFinishPrayer = () => {
     setCurrentPhase(PHASE_COMPLETED);
     setIsPrayerCompleted(true);
-    toast.success(isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!", { 
-      duration: 5000
-    });
   };
   
   const resetPrayer = () => {
@@ -213,7 +202,6 @@ const PrayerBase = ({
     setCurrentPhase(mode === 'rosario' ? PHASE_WELCOME : PHASE_INITIAL);
     setIsPrayerCompleted(false);
     window.scrollTo({ top: 0, behavior: 'smooth' });
-    toast.info(isTerco ? "Iniciando um novo terço" : "Iniciando um novo rosário", { duration: 3000 });
   };
   
   // Scroll para o topo quando a página carrega
@@ -360,13 +348,6 @@ const PrayerBase = ({
           <p className="text-lg text-vatican-dark/80 mb-6">
             Parabéns por completar o {isTerco ? "Santo Terço" : "Santo Rosário"}! Que as bênçãos de Nossa Senhora estejam com você.
           </p>
-          
-          <div className="bg-vatican-light/70 rounded-md p-4 border-l-4 border-vatican-gold mb-8">
-            <h3 className="text-xl font-medium text-vatican-dark mb-2">Salve-Rainha</h3>
-            <p className="text-vatican-dark/90 leading-relaxed">
-              {Prayers.salvePrayers}
-            </p>
-          </div>
           
           <Button 
             onClick={resetPrayer}
