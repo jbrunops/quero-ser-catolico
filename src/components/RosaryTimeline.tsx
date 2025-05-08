@@ -17,8 +17,10 @@ interface RosaryTimelineProps {
 const RosaryTimeline = ({ steps, currentStepIndex, totalSteps }: RosaryTimelineProps) => {
   const progressPercentage = Math.round((currentStepIndex / (totalSteps - 1)) * 100);
   
-  // Mostra apenas a etapa atual
-  const currentStep = steps[currentStepIndex];
+  // Mostra a etapa atual
+  // Garantir que currentStepIndex seja válido para o array steps
+  const safeIndex = Math.min(currentStepIndex, steps.length - 1);
+  const currentStep = steps[safeIndex];
   
   return (
     <div className="mb-8 bg-white/80 rounded-lg p-4 shadow-sm">
@@ -33,14 +35,14 @@ const RosaryTimeline = ({ steps, currentStepIndex, totalSteps }: RosaryTimelineP
         <div className="flex items-center justify-center px-2 w-full overflow-hidden">
           <div
             className={`px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap transition-all ${
-              currentStep.isCurrent
+              currentStep?.isCurrent
                 ? 'bg-vatican-gold/90 text-white shadow-sm'
-                : currentStep.isCompleted
+                : currentStep?.isCompleted
                   ? 'bg-vatican-blue/20 text-vatican-dark/70'
                   : 'bg-vatican-light/50 text-vatican-dark/40'
             }`}
           >
-            {currentStep.title}
+            {currentStep?.title || "Carregando..."}
           </div>
         </div>
       </div>

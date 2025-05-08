@@ -1,4 +1,3 @@
-
 import React from 'react';
 import { Mystery } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
@@ -50,11 +49,7 @@ const MysteryCard = ({
         </div>
         
         <div className="text-center text-vatican-dark/70 mb-4">
-          {hailMaryCount < 10 ? (
-            <p>{hailMaryCount} de 10 Ave-Marias rezadas</p>
-          ) : (
-            <p>Mistério completo!</p>
-          )}
+          <p>{hailMaryCount} de 10 Ave-Marias rezadas</p>
         </div>
       </div>
       

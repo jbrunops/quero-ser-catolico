@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect } from 'react';
 import PrayerStep from '../components/PrayerStep';
 import MysteryCard from '../components/MysteryCard';
@@ -59,12 +58,13 @@ const PrayerApp = () => {
     const mysteryBasePosition = initialStepsCount + currentMysteryIndex;
     
     if (currentPhase === 'ourFather') {
-      return mysteryBasePosition - 0.7; // Just starting the mystery
+      // Já estamos no mistério (para exibir o número correto no progresso)
+      return mysteryBasePosition;
     } else if (currentPhase === 'mystery') {
       // Progress within Ave-Marias
-      return mysteryBasePosition - 0.5 + (hailMaryCount / 20);
+      return mysteryBasePosition + (hailMaryCount / 20);
     } else if (currentPhase === 'glory') {
-      return mysteryBasePosition; // End of mystery
+      return mysteryBasePosition + 0.5; // End of mystery but not yet in next
     } else if (currentPhase === 'final') {
       return initialStepsCount + todaysMysteries.length; // Salve Rainha
     }
