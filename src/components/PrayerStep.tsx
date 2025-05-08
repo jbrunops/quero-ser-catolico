@@ -1,9 +1,7 @@
-
 import React, { useState } from 'react';
 import { PrayerStep as PrayerStepType } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
-import { Check, ChevronRight } from 'lucide-react';
-import { Checkbox } from '@/components/ui/checkbox';
+import { ChevronRight } from 'lucide-react';
 
 interface PrayerStepProps {
   step: PrayerStepType;
@@ -66,17 +64,11 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
       
       {hasMultiplePrayers && showPrayer && (
         <div className="mt-4 mb-6">
-          <div className="flex items-center justify-center gap-2 mb-2">
-            <p className="text-vatican-dark/80">
-              {prayersDone} de {step.repetitions} orações rezadas
-            </p>
-          </div>
-          
-          <div className="flex items-center justify-center gap-1 mb-4">
+          <div className="flex flex-wrap gap-2 justify-center my-4">
             {Array.from({ length: step.repetitions! }, (_, i) => (
               <div 
                 key={i} 
-                className={`w-6 h-6 rounded-full flex items-center justify-center transition-all ${
+                className={`w-8 h-8 rounded-full flex items-center justify-center transition-all ${
                   i < prayersDone 
                     ? 'bg-vatican-gold text-white' 
                     : 'bg-vatican-light/70 text-vatican-dark/40'
@@ -87,18 +79,13 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
             ))}
           </div>
           
-          {!isCompleted && (
-            <div className="flex items-center justify-center gap-2">
-              <Checkbox 
-                id="markDone" 
-                checked={false}
-                onCheckedChange={markPrayerDone}
-              />
-              <label htmlFor="markDone" className="text-sm text-vatican-dark/80 cursor-pointer">
-                Marcar oração como concluída
-              </label>
-            </div>
-          )}
+          <div className="text-center text-vatican-dark/70 mb-4">
+            {prayersDone < step.repetitions! ? (
+              <p>{prayersDone} de {step.repetitions} {step.title} rezadas</p>
+            ) : (
+              <p>Orações completas!</p>
+            )}
+          </div>
         </div>
       )}
       
@@ -113,11 +100,11 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
           </Button>
         ) : showPrayer && (
           <Button 
-            onClick={() => setIsCompleted(true)}
-            variant="outline" 
-            className="text-vatican-dark border-vatican-gold/50 hover:bg-vatican-light/50"
+            onClick={markPrayerDone}
+            className="prayer-btn"
           >
-            Pular para o próximo passo
+            Próximo Passo ({prayersDone + 1}/{step.repetitions})
+            <ChevronRight className="h-5 w-5" />
           </Button>
         )}
       </div>
