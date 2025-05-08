@@ -10,7 +10,6 @@ interface PrayerStepProps {
 }
 
 const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
-  const [showPrayer, setShowPrayer] = useState(false);
   const [prayersDone, setPrayersDone] = useState(0);
   const [isCompleted, setIsCompleted] = useState(false);
   
@@ -45,24 +44,15 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
       
       {step.prayerText && (
         <div className="mt-4 mb-6">
-          {!showPrayer && step.type === 'prayer' ? (
-            <Button 
-              onClick={() => setShowPrayer(true)}
-              className="bg-vatican-blue/80 hover:bg-vatican-blue text-white transition-all mb-4"
-            >
-              Mostrar Oração
-            </Button>
-          ) : (
-            <div className="bg-vatican-light rounded-md p-4 border-l-4 border-vatican-gold animate-fade-in">
-              <p className="text-vatican-dark/90 font-medium leading-relaxed whitespace-pre-line">
-                {step.prayerText}
-              </p>
-            </div>
-          )}
+          <div className="bg-vatican-light rounded-md p-4 border-l-4 border-vatican-gold animate-fade-in">
+            <p className="text-vatican-dark/90 font-medium leading-relaxed whitespace-pre-line">
+              {step.prayerText}
+            </p>
+          </div>
         </div>
       )}
       
-      {hasMultiplePrayers && showPrayer && (
+      {hasMultiplePrayers && (
         <div className="mt-4 mb-6">
           <div className="flex flex-wrap gap-2 justify-center my-4">
             {Array.from({ length: step.repetitions! }, (_, i) => (
@@ -98,7 +88,7 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
             Próximo Passo
             <ChevronRight className="h-5 w-5" />
           </Button>
-        ) : showPrayer && (
+        ) : (
           <Button 
             onClick={markPrayerDone}
             className="prayer-btn"
