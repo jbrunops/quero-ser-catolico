@@ -1,4 +1,4 @@
-# Rezando o Terço - Aplicativo de Oração Católica
+# Rezando o Terço - Um Guia Completo para Rezar o Terço e o Rosário
 
 <div align="center">
   <img src="https://img.shields.io/badge/React-61DAFB?style=for-the-badge&logo=react&logoColor=black" alt="React" />
@@ -94,6 +94,6 @@ Para mais informações, sugestões, feedback ou suporte espiritual:
 
 <div align="center">
   <p>Desenvolvido com ❤️ e devoção à espiritualidade católica</p>
-  <p>© 2023-2024 Rezar em Luz - Guia para suas orações e meditações do Santo Terço e Rosário</p>
+  <p>© 2023-2024 Rezando o Terço - Um Guia Completo para Rezar o Terço e o Rosário</p>
   <p><em>"O Santo Rosário é, depois da Sagrada Liturgia, a oração mais propícia para honrar a Santíssima Virgem Maria"</em> - São João Paulo II</p>
 </div>
