@@ -6,6 +6,9 @@ import { Plugin as importToCDN } from 'vite-plugin-cdn-import';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
+  // Configuração da base URL - usar caminho relativo para deploy
+  base: './',
+  
   server: {
     host: "::",
     port: 8080,
@@ -51,9 +54,18 @@ export default defineConfig(({ mode }) => ({
         manualChunks: {
           'react-vendor': ['react', 'react-dom', 'react-router-dom'],
         },
+        // Gerar nome de arquivos com hash para controle de cache
+        entryFileNames: 'assets/[name]-[hash].js',
+        chunkFileNames: 'assets/[name]-[hash].js',
+        assetFileNames: 'assets/[name]-[hash].[ext]'
       },
     },
     // Gerar sourcemaps apenas em desenvolvimento
     sourcemap: mode !== 'production',
+    // Assegurar que assets e caminhos estão corretos
+    assetsInlineLimit: 4096,
+    // Ativar o modo para produção estática
+    outDir: 'dist',
+    emptyOutDir: true,
   },
 }));

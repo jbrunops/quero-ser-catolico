@@ -6,8 +6,8 @@
     <meta name="theme-color" content="#D4AF37" />
     <meta name="apple-mobile-web-app-capable" content="yes" />
     <meta name="apple-mobile-web-app-status-bar-style" content="default" />
-    <link rel="icon" href="/favicon.png" type="image/png" />
-    <link rel="apple-touch-icon" href="/favicon.png" />
+    <link rel="icon" href="./favicon.png" type="image/png" />
+    <link rel="apple-touch-icon" href="./favicon.png" />
     <title>Quero Ser Católico - Um lugar dedicado a todos que querem ser católicos</title>
     <meta name="description" content="Um lugar dedicado a todos que querem aprofundar sua fé católica, com orações, terço, rosário e mais recursos para sua jornada espiritual." />
     <meta name="author" content="Quero Ser Católico" />
@@ -18,7 +18,7 @@
     <meta property="og:title" content="Quero Ser Católico - Um lugar dedicado a todos que querem ser católicos" />
     <meta property="og:description" content="Um lugar dedicado a todos que querem aprofundar sua fé católica, com orações, terço, rosário e mais recursos para sua jornada espiritual." />
     <meta property="og:type" content="website" />
-    <meta property="og:image" content="/og-image-terco.jpg" />
+    <meta property="og:image" content="./og-image-terco.jpg" />
     <meta property="og:url" content="https://www.querosercatolico.com.br" />
     <meta property="og:site_name" content="Quero Ser Católico" />
     <meta property="og:locale" content="pt_BR" />
@@ -27,8 +27,11 @@
     <meta name="twitter:site" content="@querosercatolico" />
     <meta name="twitter:title" content="Quero Ser Católico - Um lugar dedicado a todos que querem ser católicos" />
     <meta name="twitter:description" content="Um lugar dedicado a todos que querem aprofundar sua fé católica, com orações, terço, rosário e mais recursos para sua jornada espiritual." />
-    <meta name="twitter:image" content="/og-image-terco.jpg" />
+    <meta name="twitter:image" content="./og-image-terco.jpg" />
     
+    <!-- Preload de fontes e recursos críticos -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Poppins:wght@300;400;500;600;700&display=swap">
     
     <!-- Schema.org markup para Organization -->
@@ -67,6 +70,7 @@
     <div id="root"></div>
     <!-- IMPORTANT: DO NOT REMOVE THIS SCRIPT TAG OR THIS VERY COMMENT! -->
     <script src="https://cdn.gpteng.co/gptengineer.js" type="module"></script>
-    <script type="module" src="/src/main.tsx"></script>
+    <!-- Scripts do aplicativo com caminhos relativos -->
+    <script type="module" src="./src/main.tsx"></script>
   </body>
 </html>

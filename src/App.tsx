@@ -1,12 +1,13 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
+import { HashRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
 import PrayerApp from "./pages/PrayerApp";
 import RosaryApp from "./pages/RosaryApp";
 import IntroductionPage from "./pages/IntroductionPage";
+import NotFound from "./pages/NotFound";
 import { useState, useEffect } from "react";
 
 const App = () => {
@@ -26,7 +27,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <TooltipProvider>
-          <BrowserRouter>
+          <HashRouter>
             <div className="flex flex-col min-h-screen max-w-full overflow-x-hidden">
               <Header />
               <main className="flex-grow w-full px-0">
@@ -34,12 +35,12 @@ const App = () => {
                   <Route path="/" element={<IntroductionPage />} />
                   <Route path="/terco" element={<PrayerApp />} />
                   <Route path="/rosario" element={<RosaryApp />} />
-                  <Route path="*" element={<IntroductionPage />} />
+                  <Route path="*" element={<NotFound />} />
                 </Routes>
               </main>
               <Footer />
             </div>
-          </BrowserRouter>
+          </HashRouter>
         </TooltipProvider>
       </HelmetProvider>
     </QueryClientProvider>
