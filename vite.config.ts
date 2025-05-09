@@ -6,8 +6,8 @@ import { Plugin as importToCDN } from 'vite-plugin-cdn-import';
 
 // https://vitejs.dev/config/
 export default defineConfig(({ mode }) => ({
-  // Configuração da base URL - usar caminho relativo para deploy
-  base: './',
+  // Configuração da base URL - usar caminho absoluto para deploy
+  base: '/',
   
   server: {
     host: "::",
