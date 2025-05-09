@@ -407,7 +407,7 @@ const PrayerBase = ({
       return (
         <div className="prayer-card text-center">
           <div className="w-20 h-20 rounded-full bg-primary-200 flex items-center justify-center mx-auto mb-6">
-            <span className="text-4xl">✝</span>
+            <img src="/logo-sem-nome.svg" alt="Logo" className="w-12 h-12" />
           </div>
           <h2 className="text-3xl font-semibold text-primary-700 mb-6">
             {isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!"}
@@ -501,7 +501,7 @@ const PrayerBase = ({
                   <p className="text-primary-600 font-medium">
                     {isTerco ? `${getDayOfWeekName()} — ${getMysteryTitle(currentMysterySet)}` : getMysteryTitle(currentMysterySet)}
                   </p>
-                ) : (
+                ) : currentPhase === PHASE_MYSTERY_INTRO ? (
                   <>
                     <p className="text-primary-600 font-medium mb-1">
                       {isTerco ? `${getDayOfWeekName()} — ${getMysteryTitle(currentMysterySet)}` : getMysteryTitle(currentMysterySet)}
@@ -510,7 +510,7 @@ const PrayerBase = ({
                       {currentMysteries[currentMysteryIndex].title}
                     </p>
                   </>
-                )}
+                ) : null}
               </div>
             )}
           </div>

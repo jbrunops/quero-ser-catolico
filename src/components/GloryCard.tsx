@@ -53,7 +53,7 @@ const GloryCard = ({
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-primary-700 mb-3">
-        {mystery.title}
+        Glória do {mystery.title}
       </h3>
       
       <p className="text-primary-800/80 mb-4">
@@ -71,14 +71,6 @@ const GloryCard = ({
           {Prayers.oMeuJesus}
         </p>
       </div>
-      
-      {isLastMystery && (
-        <div className="bg-primary-50/70 rounded-md p-4 border-l-4 border-primary mb-6">
-          <p className="text-primary-800/90 font-medium leading-relaxed">
-            Esta é a última Ave-Maria. Após o Glória, vamos concluir com a Salve-Rainha.
-          </p>
-        </div>
-      )}
       
       <div className="flex justify-between">
         {canGoBack && onGoBack && (

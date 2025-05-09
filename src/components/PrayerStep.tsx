@@ -54,7 +54,7 @@ const PrayerStep = ({
     <div className="step-card">
       <h3 className="text-2xl font-semibold text-primary-700 mb-3 flex items-center">
         <span className="inline-block w-8 h-8 bg-primary-100 rounded-full flex items-center justify-center mr-3 text-primary-600 font-bold">
-          ✝
+          <img src="/logo-sem-nome.svg" alt="Logo" className="w-4 h-4" />
         </span>
         {step.title}
       </h3>

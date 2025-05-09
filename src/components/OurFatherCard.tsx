@@ -51,7 +51,7 @@ const OurFatherCard = ({
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-primary-700 mb-3">
-        Pai-Nosso
+        Pai-Nosso do {mystery.title}
       </h3>
       
       <p className="text-primary-800/80 mb-4">
