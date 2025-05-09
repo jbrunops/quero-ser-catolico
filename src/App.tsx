@@ -1,6 +1,6 @@
 import { TooltipProvider } from "@/components/ui/tooltip";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import { HashRouter, Routes, Route } from "react-router-dom";
+import { BrowserRouter, Routes, Route } from "react-router-dom";
 import { HelmetProvider } from "react-helmet-async";
 import Header from "./components/Header";
 import Footer from "./components/Footer";
@@ -27,7 +27,7 @@ const App = () => {
     <QueryClientProvider client={queryClient}>
       <HelmetProvider>
         <TooltipProvider>
-          <HashRouter>
+          <BrowserRouter>
             <div className="flex flex-col min-h-screen max-w-full overflow-x-hidden">
               <Header />
               <main className="flex-grow w-full px-0">
@@ -40,7 +40,7 @@ const App = () => {
               </main>
               <Footer />
             </div>
-          </HashRouter>
+          </BrowserRouter>
         </TooltipProvider>
       </HelmetProvider>
     </QueryClientProvider>
