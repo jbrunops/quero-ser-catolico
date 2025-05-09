@@ -50,7 +50,7 @@ const IntroductionPage = () => {
       <div className="bg-gradient-to-b from-primary-100 to-primary-50 backdrop-blur-sm rounded-xl p-4 md:p-6 mb-5 md:mb-8 shadow-md border border-primary/20">
         <div className="flex items-center mb-4">
           <div className="w-10 h-10 rounded-full bg-primary-200 flex items-center justify-center mr-4 shadow-sm">
-            <span className="text-primary text-lg">📿</span>
+            <img src="/logo-sem-nome.svg" alt="Logo" className="w-6 h-6" />
           </div>
           <h2 className="text-xl md:text-2xl font-semibold text-primary-700">
             Terço ou Rosário?
