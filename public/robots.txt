@@ -1,14 +1,6 @@
-User-agent: Googlebot
-Allow: /
-
-User-agent: Bingbot
-Allow: /
-
-User-agent: Twitterbot
-Allow: /
-
-User-agent: facebookexternalhit
-Allow: /
-
+# Permitir todos os robôs de busca a acessar todo o site
 User-agent: *
 Allow: /
+
+# Especificar o sitemap
+Sitemap: https://www.querosercatolico.com.br/sitemap.xml

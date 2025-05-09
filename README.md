@@ -41,6 +41,38 @@ A aplicação foi meticulosamente projetada considerando:
 - **Orações Tradicionais**: inclusão de orações tradicionais da Igreja Católica
 - **Design Inspirador**: interface que remete à estética e simbologia católica
 
+## 🔍 Otimização para SEO
+
+A aplicação foi cuidadosamente otimizada para maximizar sua visibilidade em motores de busca e plataformas de compartilhamento:
+
+### 🏷️ Metadados e Tags
+- **Meta Tags Semânticas**: descrições enriquecidas e títulos otimizados para cada página
+- **Open Graph Protocol**: implementação completa para compartilhamento ideal em redes sociais
+- **Twitter Cards**: tags específicas para visualização otimizada quando compartilhado no Twitter
+- **Dados Estruturados**: integração de schema.org para melhor compreensão pelos buscadores
+- **Canonical URLs**: prevenção de conteúdo duplicado através de URLs canônicas
+
+### 📊 Estrutura Técnica
+- **Componente SEO Dinâmico**: componente React específico que gerencia metadados para cada página
+- **React Helmet Async**: implementação para manipulação eficiente de metadados do document head
+- **Sitemap.xml**: mapa do site completo para melhor indexação pelos rastreadores
+- **Robots.txt**: instruções claras para crawlers e bots de indexação
+- **Schema.org JSON-LD**: marcação estruturada para melhor compreensão do conteúdo (Organization, WebSite, HowTo)
+
+### 🚀 Performance e Indexação
+- **Carregamento via CDN**: utilização de CDN para bibliotecas principais, melhorando o tempo de carregamento
+- **Code Splitting**: divisão inteligente de código para otimização de performance
+- **Bundle Minification**: compressão avançada para redução do tamanho dos arquivos
+- **Página 404 Otimizada**: tratamento de erros com redirecionamento inteligente
+- **Responsive Design**: experiência totalmente adaptativa para qualquer dispositivo
+
+### 📱 Otimização para Mobile
+- **Viewport Configurado**: ajustes específicos para experiência mobile ideal
+- **Teste de Mobile-Friendliness**: design aprovado para uso em dispositivos móveis
+- **Velocidade de Carregamento**: otimizações específicas para redes móveis
+
+Esta implementação abrangente de SEO garante que nosso conteúdo espiritual seja facilmente descoberto por quem busca orientação na fé católica, tanto em buscadores tradicionais quanto através de IAs e agregadores de conteúdo.
+
 ## 🙏 Experiência de Fé
 
 A aplicação proporciona uma experiência espiritual completa:
