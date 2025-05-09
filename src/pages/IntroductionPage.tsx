@@ -8,10 +8,10 @@ const IntroductionPage = () => {
     <div className="container mx-auto px-4 py-6 md:py-8 max-w-4xl">
       <div className="text-center mb-4 md:mb-6">
         <h1 className="text-2xl md:text-4xl font-bold text-primary-700 mb-3 md:mb-4">
-          Bem-vindo à Oração do Terço
+          Bem-vindo ao Quero Ser Católico
         </h1>
         <div className="flex justify-center mb-3 md:mb-5">
-          <img src="/rezando-o-terco-logo-sembg.svg" alt="Rezando o Terço" className="w-20 h-20 md:w-28 md:h-28" />
+          <img src="/quero-ser-catolico-logo.svg" alt="Quero Ser Católico" className="w-20 h-20 md:w-28 md:h-28" />
         </div>
         
         <div className="flex flex-col md:flex-row justify-center gap-3 md:gap-6 mb-8">
@@ -32,17 +32,17 @@ const IntroductionPage = () => {
 
       <div className="bg-white/80 backdrop-blur-sm shadow-md rounded-lg p-4 md:p-6 mb-5 md:mb-8">
         <h2 className="text-xl md:text-2xl font-semibold text-primary-700 mb-3 md:mb-4">
-          A Importância do Terço na Vida Católica
+          A Importância da Fé Católica
         </h2>
         <div className="space-y-3 md:space-y-4 text-sm md:text-base text-primary-800/80">
           <p>
-            O Santo Terço é uma das devoções mais poderosas da Igreja Católica. Através dele, meditamos sobre os mistérios da vida, morte e ressurreição de Jesus Cristo na companhia de Maria.
+            Ser católico é viver uma rica tradição espiritual, alimentada por séculos de sabedoria, oração e comunhão com Deus e a Igreja.
           </p>
           <p>
-            Esta oração tem sido recomendada por papas, santos e pela própria Nossa Senhora em diversas aparições, como em Fátima, onde pediu que rezássemos o terço todos os dias pela paz do mundo.
+            Nossa fé é fundamentada nas Sagradas Escrituras, na Tradição e no Magistério da Igreja, que nos guiam para uma vida plena em Cristo e nos convidam a vivenciar os sacramentos como encontros com a graça divina.
           </p>
           <p>
-            Ao rezar o terço, não apenas honramos Maria, mas também somos conduzidos por ela até Jesus, pois, como disse São Luís Maria Grignion de Montfort: <em>"Maria é o caminho mais seguro, mais curto e mais perfeito para ir a Jesus."</em>
+            Como disse São João Paulo II: <em>"Não tenham medo! Abram as portas a Cristo!"</em> Este site é dedicado a todos que desejam abrir as portas do coração para a beleza da fé católica.
           </p>
         </div>
       </div>

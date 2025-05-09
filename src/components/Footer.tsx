@@ -5,7 +5,7 @@ const Footer = () => {
     <footer className="bg-white/80 backdrop-blur-sm py-4 md:py-6 border-t border-vatican-gold/20 mt-6 md:mt-12">
       <div className="container mx-auto px-4 text-center">
         <p className="text-sm md:text-base text-vatican-dark/70">
-          Rezando o Terço © {new Date().getFullYear()} - Um Guia Completo para Rezar o Terço e o Rosário
+          Quero Ser Católico © {new Date().getFullYear()} - Um lugar dedicado a todos que querem ser católicos
         </p>
         <div className="mt-3 md:mt-4 flex flex-col items-center text-sm text-vatican-dark/70">
           <p className="mb-2">Entre em contato:</p>

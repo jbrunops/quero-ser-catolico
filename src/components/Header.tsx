@@ -61,7 +61,7 @@ const Header = () => {
         <div className="container mx-auto px-4 flex justify-between items-center">
           <div className="flex items-center gap-2">
             <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-              <img src="/rezando-o-terco-logo-sembg.svg" alt="Logo Rezando o Terço" className="w-10 h-10" />
+              <img src="/quero-ser-catolico-logo.svg" alt="Logo Quero Ser Católico" className="w-10 h-10" />
             </Link>
           </div>
           

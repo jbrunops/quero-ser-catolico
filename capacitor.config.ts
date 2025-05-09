@@ -1,8 +1,8 @@
 import type { CapacitorConfig } from '@capacitor/cli';
 
 const config: CapacitorConfig = {
-  appId: 'com.rezandooterco.app',
-  appName: 'Oração do Terço',
+  appId: 'com.querosercatolico.app',
+  appName: 'Quero Ser Católico',
   webDir: 'dist'
 };
 
