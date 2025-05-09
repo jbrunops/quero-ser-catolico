@@ -1,17 +1,21 @@
 import React from 'react';
 import { Mystery } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface MysteryIntroCardProps {
   mystery: Mystery;
   onComplete: () => void;
+  onGoBack?: () => void;
+  canGoBack?: boolean;
   isActive: boolean;
 }
 
 const MysteryIntroCard = ({ 
   mystery, 
   onComplete, 
+  onGoBack,
+  canGoBack = false,
   isActive
 }: MysteryIntroCardProps) => {
   if (!isActive) return null;
@@ -37,6 +41,13 @@ const MysteryIntroCard = ({
     onComplete();
   };
 
+  const handleGoBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onGoBack) {
+      onGoBack();
+    }
+  };
+
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
@@ -55,14 +66,27 @@ const MysteryIntroCard = ({
         </p>
       </div>
       
-      <div className="mt-6 flex justify-end">
-        <Button 
-          onClick={handleNextStep}
-          className="prayer-btn-gold transition-all duration-300"
-        >
-          Próximo Passo
-          <ChevronRight className="h-5 w-5" />
-        </Button>
+      <div className="mt-6 flex justify-between">
+        {canGoBack && onGoBack && (
+          <Button 
+            onClick={handleGoBack}
+            className="prayer-btn-secondary"
+            variant="outline"
+          >
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            Voltar
+          </Button>
+        )}
+        
+        <div className={canGoBack ? '' : 'ml-auto'}>
+          <Button 
+            onClick={handleNextStep}
+            className="prayer-btn-gold transition-all duration-300"
+          >
+            Próximo Passo
+            <ChevronRight className="h-5 w-5 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );

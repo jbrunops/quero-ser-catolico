@@ -1,10 +1,13 @@
 import React from 'react';
 import { Mystery, Prayers } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface GloryCardProps {
   mystery: Mystery;
   onComplete: () => void;
+  onGoBack?: () => void;
+  canGoBack?: boolean;
   isActive: boolean;
   isLastMystery: boolean;
 }
@@ -12,6 +15,8 @@ interface GloryCardProps {
 const GloryCard = ({ 
   mystery, 
   onComplete, 
+  onGoBack,
+  canGoBack = false,
   isActive,
   isLastMystery
 }: GloryCardProps) => {
@@ -38,6 +43,13 @@ const GloryCard = ({
     onComplete();
   };
 
+  const handleGoBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (onGoBack) {
+      onGoBack();
+    }
+  };
+
   return (
     <div className={`step-card bg-gradient-to-br ${getBgColor()} border-2`}>
       <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
@@ -60,13 +72,27 @@ const GloryCard = ({
         </p>
       </div>
       
-      <div className="flex justify-end">
-        <Button 
-          onClick={handleNextStep}
-          className="prayer-btn transition-all duration-300"
-        >
-          {isLastMystery ? 'Concluir Terço' : 'Próximo Mistério'}
-        </Button>
+      <div className="flex justify-between">
+        {canGoBack && onGoBack && (
+          <Button 
+            onClick={handleGoBack}
+            className="prayer-btn-secondary"
+            variant="outline"
+          >
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            Voltar
+          </Button>
+        )}
+        
+        <div className={canGoBack ? '' : 'ml-auto'}>
+          <Button 
+            onClick={handleNextStep}
+            className="prayer-btn transition-all duration-300"
+          >
+            {isLastMystery ? 'Concluir Terço' : 'Próximo Mistério'}
+            <ChevronRight className="h-5 w-5 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );

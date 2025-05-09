@@ -1,15 +1,23 @@
 import React, { useState } from 'react';
 import { PrayerStep as PrayerStepType } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface PrayerStepProps {
   step: PrayerStepType;
   onComplete: () => void;
+  onGoBack?: () => void;
+  canGoBack?: boolean; 
   isActive: boolean;
 }
 
-const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
+const PrayerStep = ({ 
+  step, 
+  onComplete, 
+  onGoBack, 
+  canGoBack = false,
+  isActive 
+}: PrayerStepProps) => {
   const [prayersDone, setPrayersDone] = useState(0);
   
   if (!isActive) return null;
@@ -30,6 +38,15 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
       onComplete();
     } else {
       markPrayerDone();
+    }
+  };
+
+  const handleGoBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (hasMultiplePrayers && prayersDone > 0) {
+      setPrayersDone(prev => prev - 1);
+    } else if (onGoBack) {
+      onGoBack();
     }
   };
 
@@ -79,14 +96,27 @@ const PrayerStep = ({ step, onComplete, isActive }: PrayerStepProps) => {
         </div>
       )}
       
-      <div className="mt-6 flex justify-end">
-        <Button 
-          onClick={handleNextStep}
-          className="prayer-btn"
-        >
-          {isCompleted ? 'Próximo Passo' : `Próximo Passo ${hasMultiplePrayers ? `(${prayersDone}/${step.repetitions})` : ''}`}
-          <ChevronRight className="h-5 w-5" />
-        </Button>
+      <div className="mt-6 flex justify-between">
+        {(canGoBack || (hasMultiplePrayers && prayersDone > 0)) && (
+          <Button 
+            onClick={handleGoBack}
+            className="prayer-btn-secondary"
+            variant="outline"
+          >
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            Voltar
+          </Button>
+        )}
+        
+        <div className={(canGoBack || (hasMultiplePrayers && prayersDone > 0)) ? '' : 'ml-auto'}>
+          <Button 
+            onClick={handleNextStep}
+            className="prayer-btn"
+          >
+            {isCompleted ? 'Próximo Passo' : `Próximo Passo ${hasMultiplePrayers ? `(${prayersDone}/${step.repetitions})` : ''}`}
+            <ChevronRight className="h-5 w-5 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );

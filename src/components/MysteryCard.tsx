@@ -1,11 +1,13 @@
 import React from 'react';
 import { Mystery, Prayers } from '../utils/prayers';
 import { Button } from '@/components/ui/button';
-import { ChevronRight } from 'lucide-react';
+import { ChevronRight, ChevronLeft } from 'lucide-react';
 
 interface MysteryCardProps {
   mystery: Mystery;
   onComplete: () => void;
+  onGoBack?: () => void;
+  canGoBack?: boolean;
   isActive: boolean;
   hailMaryCount: number;
   onPrayHailMary: () => void;
@@ -14,6 +16,8 @@ interface MysteryCardProps {
 const MysteryCard = ({ 
   mystery, 
   onComplete, 
+  onGoBack,
+  canGoBack = false,
   isActive,
   hailMaryCount,
   onPrayHailMary
@@ -28,6 +32,17 @@ const MysteryCard = ({
       onComplete();
     } else {
       onPrayHailMary();
+    }
+  };
+
+  const handleGoBack = (e: React.MouseEvent) => {
+    e.preventDefault();
+    if (hailMaryCount > 0) {
+      if (onGoBack) {
+        onGoBack();
+      }
+    } else if (onGoBack) {
+      onGoBack();
     }
   };
 
@@ -73,14 +88,27 @@ const MysteryCard = ({
         </div>
       </div>
       
-      <div className="mt-6 flex justify-end">
-        <Button 
-          onClick={handleNextPrayer}
-          className="prayer-btn"
-        >
-          {isCompleted ? 'Próximo Passo' : `Próximo Passo (${hailMaryCount}/10)`}
-          <ChevronRight className="h-5 w-5" />
-        </Button>
+      <div className="mt-6 flex justify-between">
+        {(canGoBack || hailMaryCount > 0) && (
+          <Button 
+            onClick={handleGoBack}
+            className="prayer-btn-secondary"
+            variant="outline"
+          >
+            <ChevronLeft className="h-5 w-5 mr-1" />
+            Voltar
+          </Button>
+        )}
+        
+        <div className={(canGoBack || hailMaryCount > 0) ? '' : 'ml-auto'}>
+          <Button 
+            onClick={handleNextPrayer}
+            className="prayer-btn"
+          >
+            {isCompleted ? 'Próximo Passo' : `Próximo Passo (${hailMaryCount}/10)`}
+            <ChevronRight className="h-5 w-5 ml-1" />
+          </Button>
+        </div>
       </div>
     </div>
   );

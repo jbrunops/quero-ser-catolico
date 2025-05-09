@@ -204,6 +204,62 @@ const PrayerBase = ({
     window.scrollTo({ top: 0, behavior: 'smooth' });
   };
   
+  // Função para voltar ao passo anterior
+  const handleGoBack = () => {
+    if (currentPhase === PHASE_INITIAL) {
+      if (currentStepIndex > 0) {
+        // Voltar para o passo anterior das orações iniciais
+        setCurrentStepIndex(prev => prev - 1);
+      } else if (mode === 'rosario') {
+        // No rosário, voltar para a tela de boas-vindas
+        setCurrentPhase(PHASE_WELCOME);
+      }
+    } else if (currentPhase === PHASE_MYSTERY_INTRO) {
+      if (currentMysteryIndex === 0 && currentMysterySetIndex === 0) {
+        // Se estiver no primeiro mistério, voltar para as orações iniciais
+        setCurrentPhase(PHASE_INITIAL);
+        setCurrentStepIndex(TercoSteps.length - 1);
+      } else if (currentMysteryIndex === 0 && currentMysterySetIndex > 0) {
+        // Se estiver no primeiro mistério de um conjunto que não é o primeiro,
+        // voltar para o último mistério do conjunto anterior
+        setCurrentMysterySetIndex(prev => prev - 1);
+        setCurrentMysteryIndex(Mysteries[mysterySets[currentMysterySetIndex - 1]].length - 1);
+        setCurrentPhase(PHASE_GLORY);
+      } else {
+        // Voltar para o Gloria do mistério anterior
+        setCurrentMysteryIndex(prev => prev - 1);
+        setCurrentPhase(PHASE_GLORY);
+      }
+    } else if (currentPhase === PHASE_OUR_FATHER) {
+      // Voltar para a introdução do mistério
+      setCurrentPhase(PHASE_MYSTERY_INTRO);
+    } else if (currentPhase === PHASE_HAIL_MARY) {
+      if (hailMaryCount > 0) {
+        // Se já rezou alguma Ave-Maria, voltar uma
+        setHailMaryCount(prev => prev - 1);
+      } else {
+        // Se não rezou nenhuma, voltar para o Pai-Nosso
+        setCurrentPhase(PHASE_OUR_FATHER);
+      }
+    } else if (currentPhase === PHASE_GLORY) {
+      // Voltar para as Ave-Marias
+      setCurrentPhase(PHASE_HAIL_MARY);
+      setHailMaryCount(10); // Todas as Ave-Marias já foram rezadas
+    } else if (currentPhase === PHASE_FINAL) {
+      // Voltar para o último Gloria
+      const lastMysterySetIndex = isTerco ? 0 : mysterySets.length - 1;
+      const lastMysteryIndex = Mysteries[mysterySets[lastMysterySetIndex]].length - 1;
+      
+      setCurrentMysterySetIndex(lastMysterySetIndex);
+      setCurrentMysteryIndex(lastMysteryIndex);
+      setCurrentPhase(PHASE_GLORY);
+    } else if (currentPhase === PHASE_COMPLETED) {
+      // Voltar para a Salve Rainha
+      setCurrentPhase(PHASE_FINAL);
+      setIsPrayerCompleted(false);
+    }
+  };
+  
   // Scroll para o topo quando a página carrega
   useEffect(() => {
     window.scrollTo(0, 0);
@@ -274,6 +330,8 @@ const PrayerBase = ({
           key={TercoSteps[currentStepIndex].id}
           step={TercoSteps[currentStepIndex]}
           onComplete={nextInitialStep}
+          onGoBack={handleGoBack}
+          canGoBack={currentStepIndex > 0 || mode === 'rosario'}
           isActive={true}
         />
       );
@@ -284,6 +342,8 @@ const PrayerBase = ({
         <MysteryIntroCard
           mystery={currentMysteries[currentMysteryIndex]}
           onComplete={handleMysteryIntroComplete}
+          onGoBack={handleGoBack}
+          canGoBack={true}
           isActive={true}
         />
       );
@@ -294,6 +354,8 @@ const PrayerBase = ({
         <OurFatherCard
           mystery={currentMysteries[currentMysteryIndex]}
           onComplete={handleOurFatherComplete}
+          onGoBack={handleGoBack}
+          canGoBack={true}
           isActive={true}
         />
       );
@@ -304,6 +366,8 @@ const PrayerBase = ({
         <MysteryCard
           mystery={currentMysteries[currentMysteryIndex]}
           onComplete={() => setCurrentPhase(PHASE_GLORY)}
+          onGoBack={handleGoBack}
+          canGoBack={true}
           isActive={true}
           hailMaryCount={hailMaryCount}
           onPrayHailMary={handlePrayHailMary}
@@ -320,6 +384,8 @@ const PrayerBase = ({
         <GloryCard
           mystery={currentMysteries[currentMysteryIndex]}
           onComplete={handleGloriaComplete}
+          onGoBack={handleGoBack}
+          canGoBack={true}
           isActive={true}
           isLastMystery={isLastMystery}
         />
@@ -330,6 +396,8 @@ const PrayerBase = ({
       return (
         <SalveRainhaCard
           onComplete={handleFinishPrayer}
+          onGoBack={handleGoBack}
+          canGoBack={true}
           isActive={true}
           type={isTerco ? 'terco' : 'rosario'}
         />
@@ -349,12 +417,21 @@ const PrayerBase = ({
             Parabéns por completar o {isTerco ? "Santo Terço" : "Santo Rosário"}! Que as bênçãos de Nossa Senhora estejam com você.
           </p>
           
-          <Button 
-            onClick={resetPrayer}
-            className="prayer-btn-gold mx-auto"
-          >
-            Rezar Novamente
-          </Button>
+          <div className="flex justify-center gap-4">
+            <Button 
+              onClick={handleGoBack}
+              className="prayer-btn-secondary"
+              variant="outline"
+            >
+              Voltar
+            </Button>
+            <Button 
+              onClick={resetPrayer}
+              className="prayer-btn-gold mx-auto"
+            >
+              Rezar Novamente
+            </Button>
+          </div>
         </div>
       );
     }
