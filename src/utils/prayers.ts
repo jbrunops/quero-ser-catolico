@@ -1,4 +1,3 @@
-
 // Tipos
 export type Mystery = {
   title: string;
@@ -34,6 +33,30 @@ export const getMysteryOfTheDay = (): string => {
       return 'luminous';
     default:
       return 'joyful';
+  }
+};
+
+export const getDayOfWeekName = (): string => {
+  const date = new Date();
+  const day = date.getDay();
+  
+  switch (day) {
+    case 0:
+      return 'Domingo';
+    case 1:
+      return 'Segunda-feira';
+    case 2:
+      return 'Terça-feira';
+    case 3:
+      return 'Quarta-feira';
+    case 4:
+      return 'Quinta-feira';
+    case 5:
+      return 'Sexta-feira';
+    case 6:
+      return 'Sábado';
+    default:
+      return '';
   }
 };
 

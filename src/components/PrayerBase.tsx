@@ -13,6 +13,7 @@ import {
   Mysteries, 
   getMysteryTitle,
   getMysteryOfTheDay,
+  getDayOfWeekName,
   Prayers,
   Mystery
 } from '../utils/prayers';
@@ -468,21 +469,15 @@ const PrayerBase = ({
       {!isPrayerCompleted ? (
         <>
           <div className="prayer-card mb-6 text-center">
-            <h1 className="rosary-heading">
+            <h1 className="rosary-heading text-3xl md:text-4xl font-bold text-primary-800 mb-2">
               {isTerco ? "Santo Terço" : "Santo Rosário"}
             </h1>
-            <p className="text-lg text-primary-800/80 mb-6">
-              Guia interativo para a oração do {isTerco ? "Santo Terço" : "Santo Rosário"}
+            <p className="text-sm text-primary-800/80 mb-4">
+              Não esqueça de rezar o santo terço pelas almas do purgatório
             </p>
             
             {currentPhase !== PHASE_WELCOME && (
-              <div className={`bg-primary-50/50 rounded-lg p-3 ${
-                (currentPhase === PHASE_MYSTERY_INTRO || 
-                 currentPhase === PHASE_OUR_FATHER || 
-                 currentPhase === PHASE_GLORY) 
-                   ? getMysteryColorClass() 
-                   : 'border-primary/30'
-              }`}>
+              <div className="mb-4">
                 {!isTerco && currentPhase !== PHASE_INITIAL && (
                   <div className="flex items-center justify-center gap-2 mb-2">
                     {mysterySets.map((set, index) => (
@@ -503,16 +498,16 @@ const PrayerBase = ({
                 )}
                 
                 {currentPhase === PHASE_INITIAL ? (
-                  <p className="text-primary-800/80">
-                    {isTerco ? "Hoje" : "Atual"}: <span className="font-medium text-primary-600">{getMysteryTitle(currentMysterySet)}</span>
+                  <p className="text-primary-600 font-medium">
+                    {isTerco ? `${getDayOfWeekName()} — ${getMysteryTitle(currentMysterySet)}` : getMysteryTitle(currentMysterySet)}
                   </p>
                 ) : (
                   <>
-                    <p className="text-primary-800/80 mb-1">
-                      <span className="font-medium text-primary-600">{getMysteryTitle(currentMysterySet)}</span>
+                    <p className="text-primary-600 font-medium mb-1">
+                      {isTerco ? `${getDayOfWeekName()} — ${getMysteryTitle(currentMysterySet)}` : getMysteryTitle(currentMysterySet)}
                     </p>
                     <p className="text-primary-800/90 font-medium">
-                      Meditando: <span className="font-semibold">{currentMysteries[currentMysteryIndex].title}</span>
+                      {currentMysteries[currentMysteryIndex].title}
                     </p>
                   </>
                 )}
