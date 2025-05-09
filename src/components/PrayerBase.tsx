@@ -267,18 +267,16 @@ const PrayerBase = ({
   
   // Obter classe de cores baseada no tipo de mistério
   const getMysteryColorClass = () => {
-    switch (currentMysterySet) {
-      case 'joyful':
-        return 'bg-blue-50 border-blue-200';
-      case 'sorrowful':
-        return 'bg-red-50 border-red-200';
-      case 'glorious':
-        return 'bg-yellow-50 border-yellow-200';
-      case 'luminous':
-        return 'bg-indigo-50 border-indigo-200';
-      default:
-        return 'bg-vatican-light/50 border-vatican-gold/30';
+    if (currentMysterySet === 'joyful') {
+      return 'border-primary-100';
+    } else if (currentMysterySet === 'luminous') {
+      return 'border-primary-300';
+    } else if (currentMysterySet === 'sorrowful') {
+      return 'border-primary-700';
+    } else if (currentMysterySet === 'glorious') {
+      return 'border-primary-500';
     }
+    return 'border-primary/30';
   };
   
   // Renderizar o conteúdo atual baseado na fase
@@ -286,37 +284,37 @@ const PrayerBase = ({
     if (currentPhase === PHASE_WELCOME) {
       return (
         <div className="step-card">
-          <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
+          <h3 className="text-2xl font-semibold text-primary-700 mb-3">
             Mistérios do Santo Rosário
           </h3>
-          <p className="text-vatican-dark/80 mb-6">
+          <p className="text-primary-800/80 mb-6">
             O Santo Rosário completo inclui os seguintes mistérios:
           </p>
           
           <div className="grid grid-cols-1 md:grid-cols-2 gap-4 mb-6">
-            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
-              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Gozosos</h4>
-              <p className="text-sm text-vatican-dark/70">Segunda-feira e Sábado</p>
+            <div className="bg-white/80 rounded-lg p-4 border border-primary/30">
+              <h4 className="text-xl font-medium text-primary-700 mb-2">Mistérios Gozosos</h4>
+              <p className="text-sm text-primary-700/70">Segunda-feira e Sábado</p>
             </div>
             
-            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
-              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Luminosos</h4>
-              <p className="text-sm text-vatican-dark/70">Quinta-feira</p>
+            <div className="bg-white/80 rounded-lg p-4 border border-primary/30">
+              <h4 className="text-xl font-medium text-primary-700 mb-2">Mistérios Luminosos</h4>
+              <p className="text-sm text-primary-700/70">Quinta-feira</p>
             </div>
             
-            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
-              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Dolorosos</h4>
-              <p className="text-sm text-vatican-dark/70">Terça-feira e Sexta-feira</p>
+            <div className="bg-white/80 rounded-lg p-4 border border-primary/30">
+              <h4 className="text-xl font-medium text-primary-700 mb-2">Mistérios Dolorosos</h4>
+              <p className="text-sm text-primary-700/70">Terça-feira e Sexta-feira</p>
             </div>
             
-            <div className="bg-white/80 rounded-lg p-4 border border-vatican-gold/30">
-              <h4 className="text-xl font-medium text-vatican-dark mb-2">Mistérios Gloriosos</h4>
-              <p className="text-sm text-vatican-dark/70">Quarta-feira e Domingo</p>
+            <div className="bg-white/80 rounded-lg p-4 border border-primary/30">
+              <h4 className="text-xl font-medium text-primary-700 mb-2">Mistérios Gloriosos</h4>
+              <p className="text-sm text-primary-700/70">Quarta-feira e Domingo</p>
             </div>
           </div>
           
           <div className="flex justify-center">
-            <Button className="prayer-btn-gold" onClick={startPrayer}>
+            <Button className="prayer-btn" onClick={startPrayer}>
               Iniciar o Rosário Completo
             </Button>
           </div>
@@ -407,27 +405,27 @@ const PrayerBase = ({
     if (currentPhase === PHASE_COMPLETED) {
       return (
         <div className="prayer-card text-center">
-          <div className="w-20 h-20 rounded-full bg-vatican-gold/30 flex items-center justify-center mx-auto mb-6">
+          <div className="w-20 h-20 rounded-full bg-primary-200 flex items-center justify-center mx-auto mb-6">
             <span className="text-4xl">✝</span>
           </div>
-          <h2 className="text-3xl font-semibold text-vatican-dark mb-6">
+          <h2 className="text-3xl font-semibold text-primary-700 mb-6">
             {isTerco ? "Santo Terço Completado!" : "Santo Rosário Completado!"}
           </h2>
-          <p className="text-lg text-vatican-dark/80 mb-6">
+          <p className="text-lg text-primary-800/80 mb-6">
             Parabéns por completar o {isTerco ? "Santo Terço" : "Santo Rosário"}! Que as bênçãos de Nossa Senhora estejam com você.
           </p>
           
           <div className="flex justify-center gap-4">
             <Button 
               onClick={handleGoBack}
-              className="prayer-btn-secondary"
+              className="prayer-btn-back"
               variant="outline"
             >
               Voltar
             </Button>
             <Button 
               onClick={resetPrayer}
-              className="prayer-btn-gold mx-auto"
+              className="prayer-btn"
             >
               Rezar Novamente
             </Button>
@@ -473,17 +471,17 @@ const PrayerBase = ({
             <h1 className="rosary-heading">
               {isTerco ? "Santo Terço" : "Santo Rosário"}
             </h1>
-            <p className="text-lg text-vatican-dark/80 mb-6">
+            <p className="text-lg text-primary-800/80 mb-6">
               Guia interativo para a oração do {isTerco ? "Santo Terço" : "Santo Rosário"}
             </p>
             
             {currentPhase !== PHASE_WELCOME && (
-              <div className={`bg-vatican-light/50 rounded-lg p-3 ${
+              <div className={`bg-primary-50/50 rounded-lg p-3 ${
                 (currentPhase === PHASE_MYSTERY_INTRO || 
                  currentPhase === PHASE_OUR_FATHER || 
                  currentPhase === PHASE_GLORY) 
                    ? getMysteryColorClass() 
-                   : 'border-vatican-gold/30'
+                   : 'border-primary/30'
               }`}>
                 {!isTerco && currentPhase !== PHASE_INITIAL && (
                   <div className="flex items-center justify-center gap-2 mb-2">
@@ -492,10 +490,10 @@ const PrayerBase = ({
                         key={set}
                         className={`px-3 py-1 text-xs rounded-full ${
                           index < currentMysterySetIndex 
-                            ? 'bg-vatican-gold/80 text-white' 
+                            ? 'bg-primary/80 text-white' 
                             : index === currentMysterySetIndex 
-                              ? 'bg-vatican-gold/30 text-vatican-dark font-medium' 
-                              : 'bg-vatican-light/70 text-vatican-dark/60'
+                              ? 'bg-primary-200 text-primary-700 font-medium' 
+                              : 'bg-primary-50/70 text-primary-700/60'
                         }`}
                       >
                         {getMysteryTitle(set).slice(0, -1)}
@@ -505,15 +503,15 @@ const PrayerBase = ({
                 )}
                 
                 {currentPhase === PHASE_INITIAL ? (
-                  <p className="text-vatican-dark/80">
-                    {isTerco ? "Hoje" : "Atual"}: <span className="font-medium text-vatican-blue">{getMysteryTitle(currentMysterySet)}</span>
+                  <p className="text-primary-800/80">
+                    {isTerco ? "Hoje" : "Atual"}: <span className="font-medium text-primary-600">{getMysteryTitle(currentMysterySet)}</span>
                   </p>
                 ) : (
                   <>
-                    <p className="text-vatican-dark/80 mb-1">
-                      <span className="font-medium text-vatican-blue">{getMysteryTitle(currentMysterySet)}</span>
+                    <p className="text-primary-800/80 mb-1">
+                      <span className="font-medium text-primary-600">{getMysteryTitle(currentMysterySet)}</span>
                     </p>
-                    <p className="text-vatican-dark/90 font-medium">
+                    <p className="text-primary-800/90 font-medium">
                       Meditando: <span className="font-semibold">{currentMysteries[currentMysteryIndex].title}</span>
                     </p>
                   </>

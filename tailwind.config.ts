@@ -1,5 +1,5 @@
-
 import type { Config } from "tailwindcss";
+import animatePlugin from "tailwindcss-animate";
 
 export default {
 	darkMode: ["class"],
@@ -30,7 +30,17 @@ export default {
 				foreground: 'hsl(var(--foreground))',
 				primary: {
 					DEFAULT: 'hsl(var(--primary))',
-					foreground: 'hsl(var(--primary-foreground))'
+					foreground: 'hsl(var(--primary-foreground))',
+					50: '#E5F4FD',
+					100: '#CCE9FA',
+					200: '#99D3F6',
+					300: '#66BDF1',
+					400: '#33A7ED',
+					500: '#0081C7',
+					600: '#0067A0',
+					700: '#004D78',
+					800: '#003351',
+					900: '#001A29',
 				},
 				secondary: {
 					DEFAULT: 'hsl(var(--secondary))',
@@ -55,13 +65,6 @@ export default {
 				card: {
 					DEFAULT: 'hsl(var(--card))',
 					foreground: 'hsl(var(--card-foreground))'
-				},
-				vatican: {
-					gold: '#D4AF37',
-					white: '#FFFFFF',
-					blue: '#436685',
-					light: '#F1F1F1',
-					dark: '#221F26'
 				},
 				sidebar: {
 					DEFAULT: 'hsl(var(--sidebar-background))',
@@ -136,5 +139,5 @@ export default {
 			}
 		}
 	},
-	plugins: [require("tailwindcss-animate")],
+	plugins: [animatePlugin],
 } satisfies Config;

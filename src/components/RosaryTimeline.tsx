@@ -26,10 +26,10 @@ const RosaryTimeline = ({ steps, currentStepIndex, totalSteps, isRosary = false 
   return (
     <div className="mb-4 md:mb-8 bg-white/80 rounded-lg p-3 md:p-4 shadow-sm">
       <div className="flex justify-between items-center mb-1 md:mb-2">
-        <h3 className="text-xs md:text-sm font-medium text-vatican-dark/70">
+        <h3 className="text-xs md:text-sm font-medium text-primary-700/70">
           {isRosary ? "Progresso do Rosário" : "Progresso do Terço"}
         </h3>
-        <span className="text-xs text-vatican-dark/50 font-medium">{progressPercentage}%</span>
+        <span className="text-xs text-primary-700/50 font-medium">{progressPercentage}%</span>
       </div>
       
       <Progress value={progressPercentage} className="h-1.5 md:h-2 mb-3 md:mb-4" />
@@ -39,10 +39,10 @@ const RosaryTimeline = ({ steps, currentStepIndex, totalSteps, isRosary = false 
           <div
             className={`px-2 md:px-3 py-1 rounded-full text-xs font-medium whitespace-nowrap truncate max-w-[90%] md:max-w-[80%] transition-all ${
               currentStep?.isCurrent
-                ? 'bg-vatican-gold/90 text-white shadow-sm'
+                ? 'bg-primary text-white shadow-sm'
                 : currentStep?.isCompleted
-                  ? 'bg-vatican-blue/20 text-vatican-dark/70'
-                  : 'bg-vatican-light/50 text-vatican-dark/40'
+                  ? 'bg-primary/20 text-primary-700/70'
+                  : 'bg-primary-50/50 text-primary-700/40'
             }`}
           >
             {currentStep?.title || "Carregando..."}

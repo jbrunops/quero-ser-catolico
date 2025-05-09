@@ -18,14 +18,12 @@ const Header = () => {
   };
   
   return (
-    <header className="bg-white/80 backdrop-blur-sm shadow-sm py-4 border-b border-vatican-gold/20 sticky top-0 z-10">
+    <header className="bg-white/80 backdrop-blur-sm shadow-sm py-4 border-b border-primary/20 sticky top-0 z-10">
       <div className="container mx-auto px-4 flex justify-between items-center">
         <div className="flex items-center gap-2">
           <Link to="/" className="flex items-center gap-2 hover:opacity-90 transition-opacity">
-            <div className="w-8 h-8 rounded-full bg-vatican-gold flex items-center justify-center text-white font-bold">
-              ✝
-            </div>
-            <h1 className="text-xl md:text-2xl font-semibold text-vatican-dark">Rezando o Terço</h1>
+            <img src="/logo-sem-nome.svg" alt="Logo Rezando o Terço" className="w-10 h-10" />
+            <h1 className="text-xl md:text-2xl font-semibold text-primary-700">Rezando o Terço</h1>
           </Link>
         </div>
         
@@ -35,9 +33,9 @@ const Header = () => {
           onClick={toggleMobileMenu}
           aria-label="Menu de navegação"
         >
-          <span className={`block w-6 h-0.5 bg-vatican-dark transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
-          <span className={`block w-6 h-0.5 bg-vatican-dark transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
-          <span className={`block w-6 h-0.5 bg-vatican-dark transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-primary-700 transition-all duration-300 ${mobileMenuOpen ? 'rotate-45 translate-y-2' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-primary-700 transition-all duration-300 ${mobileMenuOpen ? 'opacity-0' : ''}`}></span>
+          <span className={`block w-6 h-0.5 bg-primary-700 transition-all duration-300 ${mobileMenuOpen ? '-rotate-45 -translate-y-2' : ''}`}></span>
         </button>
         
         {/* Menu desktop */}
@@ -48,8 +46,8 @@ const Header = () => {
                 to="/" 
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   isActive('/') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
               >
                 Início
@@ -60,8 +58,8 @@ const Header = () => {
                 to="/terco" 
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   isActive('/terco') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
               >
                 Terço
@@ -72,8 +70,8 @@ const Header = () => {
                 to="/rosario" 
                 className={`px-4 py-2 rounded-full text-sm font-medium transition-all ${
                   isActive('/rosario') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
               >
                 Rosário
@@ -90,14 +88,14 @@ const Header = () => {
         }`}
       >
         <nav className="mt-2 px-4 pb-3">
-          <ul className="flex flex-col gap-2 border-t border-vatican-gold/10 pt-3">
+          <ul className="flex flex-col gap-2 border-t border-primary/10 pt-3">
             <li className="w-full">
               <Link 
                 to="/" 
                 className={`block px-4 py-3 rounded-md text-sm font-medium transition-all w-full text-center ${
                   isActive('/') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -109,8 +107,8 @@ const Header = () => {
                 to="/terco" 
                 className={`block px-4 py-3 rounded-md text-sm font-medium transition-all w-full text-center ${
                   isActive('/terco') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >
@@ -122,8 +120,8 @@ const Header = () => {
                 to="/rosario" 
                 className={`block px-4 py-3 rounded-md text-sm font-medium transition-all w-full text-center ${
                   isActive('/rosario') 
-                    ? 'bg-vatican-gold/20 text-vatican-dark' 
-                    : 'text-vatican-dark/70 hover:bg-vatican-light hover:text-vatican-dark'
+                    ? 'bg-primary-100 text-primary-700' 
+                    : 'text-primary-700/70 hover:bg-primary-50 hover:text-primary-700'
                 }`}
                 onClick={() => setMobileMenuOpen(false)}
               >

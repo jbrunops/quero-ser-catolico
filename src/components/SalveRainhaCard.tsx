@@ -35,14 +35,14 @@ const SalveRainhaCard = ({
 
   return (
     <div className="step-card">
-      <h3 className="text-2xl font-semibold text-vatican-dark mb-3">
+      <h3 className="text-2xl font-semibold text-primary-700 mb-3">
         Salve-Rainha
       </h3>
-      <p className="text-vatican-dark/80 mb-4">
+      <p className="text-primary-800/80 mb-4">
         Conclua o {type === 'terco' ? 'terço' : 'rosário'} com a Salve-Rainha.
       </p>
-      <div className="bg-vatican-light/70 rounded-md p-4 border-l-4 border-vatican-gold mb-6">
-        <p className="text-vatican-dark/90 font-medium leading-relaxed">
+      <div className="bg-primary-50/70 rounded-md p-4 border-l-4 border-primary mb-6">
+        <p className="text-primary-800/90 font-medium leading-relaxed">
           {Prayers.salvePrayers}
         </p>
       </div>
@@ -51,7 +51,7 @@ const SalveRainhaCard = ({
         {canGoBack && onGoBack && (
           <Button 
             onClick={handleGoBack}
-            className="prayer-btn-secondary"
+            className="prayer-btn-back"
             variant="outline"
           >
             <ChevronLeft className="h-5 w-5 mr-1" />
