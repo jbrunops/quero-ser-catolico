@@ -82,7 +82,7 @@ const DonationModal: React.FC<DonationModalProps> = ({ isOpen, onClose }) => {
           <div className="flex justify-center mb-5">
             <div className="bg-gray-50 p-3 rounded-lg border border-gray-200">
               <img 
-                src="/doacao.png" 
+                src={import.meta.env.BASE_URL + "doacao.png"} 
                 alt="QR Code para doação via Pix" 
                 className="w-48 h-48 object-contain"
               />
