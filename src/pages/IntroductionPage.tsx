@@ -8,21 +8,58 @@ const IntroductionPage = () => {
   return (
     <>
       <SEO 
-        title="Quero Ser Católico - Sua jornada na fé católica começa aqui"
-        description="Descubra a riqueza da fé católica, aprenda a rezar o terço e o rosário, e aprofunde sua conexão espiritual com Cristo e a Igreja Católica."
-        keywords="oração católica, terço, rosário, rezar terço online, fé católica, catolicismo, igreja católica, orações"
+        title="Como Rezar o Terço e Rosário Online | Aprenda Passo a Passo | Quero Ser Católico"
+        description="Aprenda como rezar o terço e rosário católico online. Guia completo passo a passo com orações tradicionais, mistérios e devoção mariana. Plataforma católica gratuita para iniciar sua jornada de fé."
+        keywords="como rezar o terço, rezar terço online, como rezar rosário, santo terço católico, rosário católico, aprenda rezar terço, terço online grátis, oração católica, ave maria, pai nosso, mistérios do terço, nossa senhora, devoção mariana, igreja católica, como fazer o terço, passo a passo terço, guia católico, orações tradicionais católicas"
         canonical="https://www.querosercatolico.com.br"
         schemaType="WebPage"
         schemaData={{
           mainEntity: {
             "@type": "WebPage",
-            name: "Quero Ser Católico - Página Principal",
-            description: "Portal católico dedicado à oração e ao crescimento espiritual",
-            potentialAction: {
-              "@type": "ReadAction",
-              target: [
-                "https://www.querosercatolico.com.br/terco",
-                "https://www.querosercatolico.com.br/rosario"
+            name: "Como Rezar o Terço e Rosário Online - Guia Católico Completo",
+            description: "Portal católico dedicado a ensinar como rezar o terço e rosário passo a passo, com guias interativos e orações tradicionais da Igreja Católica",
+            about: [
+              {
+                "@type": "Thing",
+                "name": "Santo Terço Católico",
+                "description": "Oração mariana tradicional da Igreja Católica"
+              },
+              {
+                "@type": "Thing", 
+                "name": "Santo Rosário",
+                "description": "Oração completa com todos os mistérios marianos"
+              },
+              {
+                "@type": "Thing",
+                "name": "Educação Católica",
+                "description": "Ensino das tradições e orações católicas"
+              }
+            ],
+            potentialAction: [
+              {
+                "@type": "ReadAction",
+                "target": "https://www.querosercatolico.com.br/terco",
+                "name": "Aprender a Rezar o Santo Terço"
+              },
+              {
+                "@type": "ReadAction", 
+                "target": "https://www.querosercatolico.com.br/rosario",
+                "name": "Aprender a Rezar o Santo Rosário"
+              }
+            ],
+            mainContentOfPage: {
+              "@type": "WebPageElement",
+              "cssSelector": "main"
+            },
+            breadcrumb: {
+              "@type": "BreadcrumbList",
+              "itemListElement": [
+                {
+                  "@type": "ListItem",
+                  "position": 1,
+                  "name": "Início",
+                  "item": "https://www.querosercatolico.com.br"
+                }
               ]
             }
           }

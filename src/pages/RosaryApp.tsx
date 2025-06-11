@@ -6,52 +6,94 @@ const RosaryApp = () => {
   return (
     <>
       <SEO 
-        title="Santo Rosário Completo - Reze todos os Mistérios | Quero Ser Católico"
-        description="Reze o Santo Rosário completo online com todos os Mistérios: Gozosos, Luminosos, Dolorosos e Gloriosos. Uma ferramenta para auxiliar sua devoção mariana."
-        keywords="rosário completo, rosário católico, terço completo, mistérios do rosário, oração mariana, rosário online, rezar rosário"
+        title="Como Rezar o Santo Rosário Completo Online | Todos os Mistérios | Guia Católico"
+        description="Aprenda como rezar o santo rosário católico completo online com todos os Mistérios: Gozosos, Luminosos, Dolorosos e Gloriosos. Guia passo a passo completo com orações tradicionais e meditação mariana."
+        keywords="como rezar o rosário, rosário completo online, santo rosário católico, mistérios do rosário, como rezar terço completo, rosário católico online, aprenda rezar rosário, rosário online grátis, oração mariana, mistérios gozosos, mistérios dolorosos, mistérios gloriosos, mistérios luminosos, nossa senhora, devoção católica, ave maria, pai nosso, como fazer rosário"
         canonical="https://www.querosercatolico.com.br/rosario"
         schemaType="WebPage"
         schemaData={{
           mainEntity: {
             "@type": "HowTo",
-            "name": "Como Rezar o Santo Rosário Completo",
-            "description": "Guia para rezar o Santo Rosário Católico completo com todos os mistérios",
+            "name": "Como Rezar o Santo Rosário Católico Completo",
+            "description": "Guia completo passo a passo para aprender como rezar o Santo Rosário Católico com todos os mistérios: Gozosos, Luminosos, Dolorosos e Gloriosos",
+            "totalTime": "PT60M",
+            "estimatedCost": {
+              "@type": "MonetaryAmount",
+              "currency": "BRL",
+              "value": "0"
+            },
+            "supply": [
+              {
+                "@type": "HowToSupply",
+                "name": "Rosário Católico Completo"
+              },
+              {
+                "@type": "HowToSupply", 
+                "name": "Local silencioso para oração prolongada"
+              }
+            ],
+            "tool": [
+              {
+                "@type": "HowToTool",
+                "name": "Dispositivo com acesso à internet"
+              }
+            ],
             "step": [
               {
                 "@type": "HowToStep",
-                "name": "Sinal da Cruz",
-                "text": "Faça o sinal da cruz e recite a oração inicial."
+                "name": "Preparação Inicial",
+                "text": "Faça o Sinal da Cruz e recite as orações iniciais do Rosário.",
+                "url": "https://www.querosercatolico.com.br/rosario#preparacao"
               },
               {
                 "@type": "HowToStep",
-                "name": "Mistérios Gozosos",
-                "text": "Medite sobre os cinco Mistérios Gozosos: Anunciação, Visitação, Nascimento de Jesus, Apresentação no Templo e Perda e Encontro de Jesus."
+                "name": "Primeiro Conjunto - Mistérios Gozosos",
+                "text": "Medite sobre os cinco Mistérios Gozosos, recitando as orações tradicionais para cada mistério.",
+                "url": "https://www.querosercatolico.com.br/rosario#misterios-gozosos"
               },
               {
                 "@type": "HowToStep",
-                "name": "Mistérios Luminosos",
-                "text": "Medite sobre os cinco Mistérios Luminosos: Batismo de Jesus, Bodas de Caná, Anúncio do Reino, Transfiguração e Instituição da Eucaristia."
+                "name": "Segundo Conjunto - Mistérios Luminosos", 
+                "text": "Continue com os cinco Mistérios Luminosos da vida pública de Jesus.",
+                "url": "https://www.querosercatolico.com.br/rosario#misterios-luminosos"
               },
               {
                 "@type": "HowToStep",
-                "name": "Mistérios Dolorosos",
-                "text": "Medite sobre os cinco Mistérios Dolorosos: Agonia no Horto, Flagelação, Coroação de Espinhos, Caminho da Cruz e Crucificação."
+                "name": "Terceiro Conjunto - Mistérios Dolorosos",
+                "text": "Medite sobre os cinco Mistérios Dolorosos da Paixão de Cristo.",
+                "url": "https://www.querosercatolico.com.br/rosario#misterios-dolorosos"
               },
               {
                 "@type": "HowToStep",
-                "name": "Mistérios Gloriosos",
-                "text": "Medite sobre os cinco Mistérios Gloriosos: Ressurreição, Ascensão, Pentecostes, Assunção de Maria e Coroação de Maria."
+                "name": "Quarto Conjunto - Mistérios Gloriosos",
+                "text": "Finalize com os cinco Mistérios Gloriosos da Ressurreição e Glória.",
+                "url": "https://www.querosercatolico.com.br/rosario#misterios-gloriosos"
+              },
+              {
+                "@type": "HowToStep",
+                "name": "Oração Final",
+                "text": "Conclua com a Salve Rainha e as orações finais do Rosário.",
+                "url": "https://www.querosercatolico.com.br/rosario#oracao-final"
+              }
+            ],
+            "about": [
+              {
+                "@type": "Thing",
+                "name": "Santo Rosário Católico"
+              },
+              {
+                "@type": "Thing", 
+                "name": "Mistérios Marianos"
+              },
+              {
+                "@type": "Thing",
+                "name": "Devoção Mariana Completa"
               }
             ]
           }
         }}
       />
-      <PrayerBase 
-        mode="rosario"
-        mysterySets={['joyful', 'luminous', 'sorrowful', 'glorious']}
-        showHeader={false}
-        showFooter={false}
-      />
+      <PrayerBase mode="rosario" />
     </>
   );
 };

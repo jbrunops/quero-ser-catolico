@@ -21,14 +21,14 @@ type SEOProps = {
 const baseDomain = 'https://www.querosercatolico.com.br';
 
 const SEO = ({
-  title = 'Quero Ser Católico - Um lugar dedicado a todos que querem ser católicos',
-  description = 'Um lugar dedicado a todos que querem aprofundar sua fé católica, com orações, terço, rosário e mais recursos para sua jornada espiritual.',
-  keywords = 'católico, fé católica, terço, rosário, orações católicas, igreja católica',
+  title = 'Como Rezar o Terço Online | Quero Ser Católico - Aprenda a Rezar o Santo Terço',
+  description = 'Aprenda como rezar o terço católico passo a passo. Reze o santo terço online com guia completo, orações tradicionais e meditação dos mistérios. Plataforma gratuita para sua devoção mariana.',
+  keywords = 'como rezar o terço, rezar terço online, santo terço, terço católico, aprenda rezar terço, terço online grátis, oração do terço, ave maria, pai nosso, rosário católico, orações católicas, igreja católica, nossa senhora, devoção mariana, mistérios do terço, como fazer o terço, passo a passo terço',
   type = 'website',
   name = 'Quero Ser Católico',
   url = baseDomain,
   image = '/og-image-terco.jpg',
-  imageAlt = 'Quero Ser Católico',
+  imageAlt = 'Como Rezar o Santo Terço - Guia Católico Online',
   publishedTime,
   modifiedTime,
   author = 'Quero Ser Católico',

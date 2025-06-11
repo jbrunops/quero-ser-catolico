@@ -1,13 +1,11 @@
 import React, { useState, useRef, useEffect } from 'react';
 import { Link, useLocation } from 'react-router-dom';
-import DonationModal from './DonationModal';
 
 const Header = () => {
   const location = useLocation();
   const path = location.pathname;
   const [mobileMenuOpen, setMobileMenuOpen] = useState(false);
   const [isDropdownOpen, setIsDropdownOpen] = useState(false);
-  const [isDonationModalOpen, setIsDonationModalOpen] = useState(false);
   const dropdownRef = useRef<HTMLDivElement>(null);
   
   const isActive = (route: string) => {
@@ -23,14 +21,6 @@ const Header = () => {
   
   const toggleDropdown = () => {
     setIsDropdownOpen(!isDropdownOpen);
-  };
-  
-  const openDonationModal = () => {
-    setIsDonationModalOpen(true);
-  };
-  
-  const closeDonationModal = () => {
-    setIsDonationModalOpen(false);
   };
   
   // Fechar o dropdown quando clicar fora dele
@@ -66,14 +56,6 @@ const Header = () => {
           </div>
           
           <div className="flex items-center gap-3">
-            {/* Botão de Doação (Desktop) */}
-            <button 
-              onClick={openDonationModal}
-              className="hidden md:flex items-center px-4 py-2 bg-green-600 hover:bg-green-700 text-white font-medium rounded-lg transition-colors shadow-sm"
-            >
-              DOAÇÃO
-            </button>
-            
             {/* Botão do menu mobile */}
             <button 
               className="md:hidden flex flex-col justify-center items-center gap-1.5"
@@ -213,24 +195,10 @@ const Header = () => {
                   Rezar O Santo Rosário
                 </Link>
               </li>
-              <li className="w-full mt-2">
-                <button 
-                  onClick={() => {
-                    setMobileMenuOpen(false);
-                    openDonationModal();
-                  }}
-                  className="w-full px-4 py-3 bg-green-600 text-white font-medium rounded-md shadow-sm"
-                >
-                  DOAÇÃO
-                </button>
-              </li>
             </ul>
           </nav>
         </div>
       </header>
-      
-      {/* Modal de Doação */}
-      <DonationModal isOpen={isDonationModalOpen} onClose={closeDonationModal} />
     </>
   );
 };
